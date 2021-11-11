@@ -20,15 +20,19 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="45"></RowDefinition>
         </Grid.RowDefinitions>
-        <Rectangle Grid.Row="0" Fill="Red" />
-        <Grid Grid.Row="1" Background="{ThemeResource AppBarBackgroundThemeBrush}" VerticalAlignment="Stretch" Padding="0">
+
+        <!-- TODO: Replace with Servo webview -->
+        <WebView x:ConnectionId='1' x:Name="WebView" Grid.Row="0"                                                             />
+
+        <Grid Grid.Row="1" Background="{ThemeResource AppBarBackgroundThemeBrush}" VerticalAlignment="Stretch" Padding="0" HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="45"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <AutoSuggestBox Grid.Column="0" PlaceholderText="Search or browser" VerticalAlignment="Center" Margin="10 0" QueryIcon="Find" Background="Transparent" BorderBrush="Transparent" />
-            <Button x:ConnectionId='1' x:Name="Menu" Grid.Column="1" Background="Transparent" Margin="0" Padding="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"                   >
+            <AutoSuggestBox x:ConnectionId='2' x:Name="Addressbar" Grid.Column="0"                                            PlaceholderText="Search or browser" VerticalAlignment="Center" Margin="10 0" QueryIcon="Find" Background="Transparent" BorderBrush="Transparent" />
+
+            <Button x:ConnectionId='3' x:Name="Menu" Grid.Column="1" Background="Transparent" Margin="0" Padding="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"                   >
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE10C;" HorizontalAlignment="Stretch" Height="20" Margin="0,0,0,0" VerticalAlignment="Bottom" />
             </Button>
         </Grid>

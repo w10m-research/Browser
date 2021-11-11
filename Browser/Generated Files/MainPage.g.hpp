@@ -32,6 +32,20 @@ void ::Browser::MainPage::Connect(int __connectionId, ::Platform::Object^ __targ
     {
     case 1:
         {
+            this->WebView = safe_cast<::Windows::UI::Xaml::Controls::WebView^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::WebView^>(this->WebView))->FrameNavigationCompleted += ref new ::Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::Controls::WebView^, ::Windows::UI::Xaml::Controls::WebViewNavigationCompletedEventArgs^>(this, (void (::Browser::MainPage::*)
+                (::Windows::UI::Xaml::Controls::WebView^, ::Windows::UI::Xaml::Controls::WebViewNavigationCompletedEventArgs^))&MainPage::WebView_FrameNavigationCompleted);
+        }
+        break;
+    case 2:
+        {
+            this->Addressbar = safe_cast<::Windows::UI::Xaml::Controls::AutoSuggestBox^>(__target);
+            (safe_cast<::Windows::UI::Xaml::Controls::AutoSuggestBox^>(this->Addressbar))->QuerySubmitted += ref new ::Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::Controls::AutoSuggestBox^, ::Windows::UI::Xaml::Controls::AutoSuggestBoxQuerySubmittedEventArgs^>(this, (void (::Browser::MainPage::*)
+                (::Windows::UI::Xaml::Controls::AutoSuggestBox^, ::Windows::UI::Xaml::Controls::AutoSuggestBoxQuerySubmittedEventArgs^))&MainPage::Addressbar_QuerySubmitted);
+        }
+        break;
+    case 3:
+        {
             this->Menu = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
             (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->Menu))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Browser::MainPage::*)
                 (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::Menu_Click);
