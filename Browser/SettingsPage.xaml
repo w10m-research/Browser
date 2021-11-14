@@ -17,7 +17,20 @@
         </PivotItem>
         <PivotItem Header="About">
             <StackPanel>
-                <TextBlock>Browser</TextBlock>
+                <TextBlock>Browser x.x.x.x</TextBlock>
+                <!--
+                <TextBlock>Servo git-xxxxxxx</TextBlock>
+                -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0">Developed with</TextBlock>
+                    <FontIcon Grid.Column="1" Glyph="&#xEB52;" Margin="5,0,5,0" FontSize="10" Foreground="#FFD61C1C"/>
+                    <TextBlock Grid.Column="2">by Filiph Sandström</TextBlock>
+                </Grid>
             </StackPanel>
         </PivotItem>
     </Pivot>
