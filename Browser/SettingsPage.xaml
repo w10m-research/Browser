@@ -22,17 +22,8 @@
                 <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Margin="{ThemeResource ContentDialogTitleMargin}">About this app</TextBlock>
                 -->
                 <TextBlock x:Name="AppVersionStr" TextWrapping="Wrap">Browser x.x.x.x</TextBlock>
-                <TextBlock x:Name="EngineVersionStr">Servo git-xxxxxxx</TextBlock>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0">Developed with</TextBlock>
-                    <FontIcon Grid.Column="1" Glyph="&#xEB52;" Margin="5,2,5,0" FontSize="10" Foreground="#FFD61C1C" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Column="2">by Filiph Sandström</TextBlock>
-                </Grid>
+                <TextBlock x:Name="EngineVersionStr" TextWrapping="Wrap">Servo git-xxxxxxx</TextBlock>
+                <TextBlock TextWrapping="Wrap" FontFamily="Segoe MDL2 Assets">Developed with <Run Text="&#xEB52;" Foreground="#FFD61C1C" FontSize="10" /> by Filiph Sandström</TextBlock>
             </StackPanel>
         </PivotItem>
     </Pivot>
