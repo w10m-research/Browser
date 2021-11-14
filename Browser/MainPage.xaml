@@ -21,18 +21,32 @@
             <RowDefinition Height="45"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <!-- TODO: Replace with Servo webview -->
-        <WebView x:Name="WebView" Grid.Row="0" FrameNavigationCompleted="WebView_FrameNavigationCompleted" />
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!-- TODO: Replace with Servo webview -->
+            <WebView Grid.Row="0" x:Name="WebView" FrameNavigationCompleted="WebView_FrameNavigationCompleted" DefaultBackgroundColor="White" />
+            
+            <ProgressBar x:Name="BrowserProgress" Grid.Row="1" Value="50" />
+        </Grid>
 
         <Grid Grid.Row="1" Background="{ThemeResource AppBarBackgroundThemeBrush}" VerticalAlignment="Stretch" Padding="0" HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="45"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="45"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <AutoSuggestBox x:Name="Addressbar" Grid.Column="0" QuerySubmitted="Addressbar_QuerySubmitted" PlaceholderText="Search or browser" VerticalAlignment="Center" Margin="10 0" QueryIcon="Find" Background="Transparent" BorderBrush="Transparent" />
+            <Button x:Name="Tabs" Grid.Column="0" Background="Transparent" Margin="0" Padding="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="Tabs_Click">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF5ED;" HorizontalAlignment="Stretch" Height="20" Margin="0,0,0,0" VerticalAlignment="Bottom" />
+            </Button>
 
-            <Button x:Name="Menu" Grid.Column="1" Background="Transparent" Margin="0" Padding="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="Menu_Click">
+            <AutoSuggestBox x:Name="Addressbar" Grid.Column="1" QuerySubmitted="Addressbar_QuerySubmitted" PlaceholderText="Search or browser" VerticalAlignment="Center" Margin="10 0" QueryIcon="Find" Background="Transparent" BorderBrush="Transparent" />
+
+            <Button x:Name="Menu" Grid.Column="2" Background="Transparent" Margin="0" Padding="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="Menu_Click">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE10C;" HorizontalAlignment="Stretch" Height="20" Margin="0,0,0,0" VerticalAlignment="Bottom" />
             </Button>
         </Grid>

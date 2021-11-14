@@ -11,9 +11,10 @@ namespace Windows {
     namespace UI {
         namespace Xaml {
             namespace Controls {
-                ref class WebView;
-                ref class AutoSuggestBox;
                 ref class Button;
+                ref class AutoSuggestBox;
+                ref class WebView;
+                ref class ProgressBar;
             }
         }
     }
@@ -39,9 +40,11 @@ namespace Browser
         bool _contentLoaded;
     
     
-        private: ::Windows::UI::Xaml::Controls::WebView^ WebView;
+        private: ::Windows::UI::Xaml::Controls::Button^ Tabs;
         private: ::Windows::UI::Xaml::Controls::AutoSuggestBox^ Addressbar;
         private: ::Windows::UI::Xaml::Controls::Button^ Menu;
+        private: ::Windows::UI::Xaml::Controls::WebView^ WebView;
+        private: ::Windows::UI::Xaml::Controls::ProgressBar^ BrowserProgress;
     };
 }
 
