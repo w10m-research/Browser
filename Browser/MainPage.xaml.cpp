@@ -6,6 +6,7 @@
 #include "pch.h"
 #include "MainPage.xaml.h"
 #include "SettingsPage.xaml.h"
+#include "BrowserState.h"
 
 using namespace Browser;
 
@@ -22,21 +23,6 @@ using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
 using namespace concurrency;
 
-void Navigate_To(Windows::UI::Xaml::Controls::WebView^ WebView, Platform::String^ address) {
-	Uri^ url = ref new Uri(address);
-	auto request = ref new Windows::Web::Http::HttpRequestMessage(Windows::Web::Http::HttpMethod::Get, url);
-
-	// Set the user agent to something compentent,
-	// TODO: figure out a way to also do this for
-	// subsequent requests (eg resources).
-	request->Headers->Insert("User-Agent", L"Mozilla/5.0 (iPhone; CPU iPhone OS 15_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1");
-
-	// Send request.
-	WebView->NavigateWithHttpRequestMessage(request);
-
-	// TODO: Push to history.
-}
-
 MainPage::MainPage()
 {
 	InitializeComponent();
@@ -46,6 +32,9 @@ MainPage::MainPage()
 	// Initialize 
 	BrowserProgress->Value = 0;
 	BrowserProgress->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+
+	// Setup browser manager
+	this->State = new BrowserState(this->WebView);
 }
 
 void Browser::MainPage::Addressbar_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e)
@@ -74,7 +63,7 @@ void Browser::MainPage::Addressbar_KeyDown(Platform::Object^ sender, Windows::UI
 	}
 
 	// Send navigation request.
-	Navigate_To(WebView, _url);
+	State->NavigateTo(_url);
 
 	// Unfocus Textbox.
 	WebView->Focus(Windows::UI::Xaml::FocusState::Programmatic);
@@ -107,7 +96,7 @@ void Browser::MainPage::Tabs_Click(Platform::Object^ sender, Windows::UI::Xaml::
 	// TODO: Show tabs view.
 
 	Windows::UI::Popups::MessageDialog alert{ L"TODO: Tabs menu." };
-	alert.ShowAsync();
+	create_task(alert.ShowAsync());
 }
 
 void Browser::MainPage::Addressbar_GotFocus(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
@@ -125,12 +114,13 @@ void Browser::MainPage::WebView_NavigationStarting(Windows::UI::Xaml::Controls::
 
 void Browser::MainPage::AboutBtn_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	Navigate_To(WebView, L"https://github.com/w10m-research/Browser");
+	State->NavigateTo(L"https://github.com/w10m-research/Browser");
 }
 
 
 void Browser::MainPage::RefreshBtn_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	// TODO: user BrowserState
 	WebView->Navigate(WebView->BaseUri);
 }
 

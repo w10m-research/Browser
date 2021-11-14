@@ -89,6 +89,7 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
         }
     }
 
+	// Handle back button
 	Windows::UI::Core::SystemNavigationManager::GetForCurrentView()->
 		BackRequested += ref new Windows::Foundation::EventHandler<
 		Windows::UI::Core::BackRequestedEventArgs^>(

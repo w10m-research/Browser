@@ -6,6 +6,7 @@
 #pragma once
 
 #include "MainPage.g.h"
+#include "BrowserState.h"
 
 namespace Browser
 {
@@ -18,6 +19,7 @@ namespace Browser
 		MainPage();
 
 	private:
+		BrowserState *State;
 		void WebView_FrameNavigationCompleted(Windows::UI::Xaml::Controls::WebView^ sender, Windows::UI::Xaml::Controls::WebViewNavigationCompletedEventArgs^ args);
 		void Tabs_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void Addressbar_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e);
