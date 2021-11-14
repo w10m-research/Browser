@@ -18,11 +18,13 @@ using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
+using namespace concurrency;
 
 MainPage::MainPage()
 {
 	InitializeComponent();
 
+	// Initialize 
 	BrowserProgress->Value = 0;
 	BrowserProgress->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
 }
@@ -35,14 +37,17 @@ void Browser::MainPage::Menu_Click(Platform::Object^ sender, Windows::UI::Xaml::
 	alert.ShowAsync();
 }
 
-void Browser::MainPage::Addressbar_QuerySubmitted(Windows::UI::Xaml::Controls::AutoSuggestBox^ sender, Windows::UI::Xaml::Controls::AutoSuggestBoxQuerySubmittedEventArgs^ args)
+void Browser::MainPage::Addressbar_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e)
 {
+	if (e->Key != Windows::System::VirtualKey::Enter)
+		return;
+
 	String^ _url;
 	try {
 		ref new Uri(Addressbar->Text);
 		_url = Addressbar->Text;
 	}
-	catch ( ... ) {
+	catch (...) {
 		// TODO: do this properly.
 		try {
 			_url = L"https://" + Addressbar->Text;
@@ -58,24 +63,34 @@ void Browser::MainPage::Addressbar_QuerySubmitted(Windows::UI::Xaml::Controls::A
 
 	Uri^ url = ref new Uri(_url);
 	auto request = ref new Windows::Web::Http::HttpRequestMessage(Windows::Web::Http::HttpMethod::Get, url);
+
 	// Set the user agent to something compentent,
 	// TODO: figure out a way to also do this for
 	// subsequent requests (eg resources).
-	request->Headers->Insert("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 15_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1");
+	request->Headers->Insert("User-Agent", L"Mozilla/5.0 (iPhone; CPU iPhone OS 15_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1");
 
 	// Send request.
 	WebView->NavigateWithHttpRequestMessage(request);
 
 	// Unfocus Textbox.
-	// Addressbar->Focus(Windows::UI::Xaml::FocusState::Unfocused);
+	WebView->Focus(Windows::UI::Xaml::FocusState::Programmatic);
 
 	// TODO: Progressbar.
-	BrowserProgress->Value = 0;
+	BrowserProgress->Value = 25;
 	BrowserProgress->Visibility = Windows::UI::Xaml::Visibility::Visible;
 }
 
 void Browser::MainPage::WebView_FrameNavigationCompleted(Windows::UI::Xaml::Controls::WebView^ sender, Windows::UI::Xaml::Controls::WebViewNavigationCompletedEventArgs^ args)
 {
+	// TODO: handle alert
+
+	// Temporary pre-engine switch to servo
+	// Add polyfills
+	auto corejs = ref new Platform::Collections::Vector<String^>(1);
+	corejs->SetAt(0, L"var script=document.createElement('script');script.src='https://cdnjs.cloudflare.com/ajax/libs/core-js/3.19.1/minified.min.js';document.head.appendChild(script);");
+	create_task(WebView->InvokeScriptAsync("eval", corejs));
+
+	// TODO: only display the url if we're not on a search url (eg google.com/search?q=xxxx).
 	Addressbar->Text = WebView->Source->DisplayUri;
 
 	BrowserProgress->Value = 100;
@@ -89,4 +104,10 @@ void Browser::MainPage::Tabs_Click(Platform::Object^ sender, Windows::UI::Xaml::
 
 	Windows::UI::Popups::MessageDialog alert{ L"TODO: Tabs menu." };
 	alert.ShowAsync();
+}
+
+void Browser::MainPage::Addressbar_GotFocus(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	// Automatically select the contents on tap.
+	Addressbar->SelectAll();
 }
