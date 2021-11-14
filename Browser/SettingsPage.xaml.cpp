@@ -24,4 +24,18 @@ using namespace Windows::UI::Xaml::Navigation;
 SettingsPage::SettingsPage()
 {
 	InitializeComponent();
+
+	// App Version
+	auto major = Windows::ApplicationModel::Package::Current->Id->Version.Major.ToString();
+	auto minor = Windows::ApplicationModel::Package::Current->Id->Version.Minor.ToString();
+	auto revision = Windows::ApplicationModel::Package::Current->Id->Version.Revision.ToString();
+	auto build = Windows::ApplicationModel::Package::Current->Id->Version.Build.ToString();
+	auto version_str = major + "." + minor + "." + revision + "." + build;
+	AppVersionStr->Text = Windows::ApplicationModel::Package::Current->DisplayName + " " + version_str;
+
+	// TODO: Engine version
+	EngineVersionStr->Text = L"EdgeHTML x.x.x.x";
+
+	// TODO: Properly init all settings
+	UserAgentStr->Text = L"TODO, come back later";
 }

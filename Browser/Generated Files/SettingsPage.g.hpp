@@ -29,6 +29,16 @@ void ::Browser::SettingsPage::Connect(int __connectionId, ::Platform::Object^ __
     {
         case 1:
             {
+                this->AppVersionStr = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 2:
+            {
+                this->EngineVersionStr = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 3:
+            {
                 this->UserAgentStr = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
             }
             break;

@@ -11,6 +11,7 @@ namespace Windows {
     namespace UI {
         namespace Xaml {
             namespace Controls {
+                ref class TextBlock;
                 ref class TextBox;
             }
         }
@@ -32,6 +33,8 @@ namespace Browser
     private:
         bool _contentLoaded;
     
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ AppVersionStr;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ EngineVersionStr;
         private: ::Windows::UI::Xaml::Controls::TextBox^ UserAgentStr;
     };
 }
