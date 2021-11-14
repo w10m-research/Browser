@@ -23,5 +23,10 @@ namespace Browser
 		void Tabs_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void Addressbar_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e);
 		void Addressbar_GotFocus(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void WebView_GotFocus(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void WebView_NavigationStarting(Windows::UI::Xaml::Controls::WebView^ sender, Windows::UI::Xaml::Controls::WebViewNavigationStartingEventArgs^ args);
+		void AboutBtn_Tapped(Platform::Object^ sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs^ e);
+		void PopupMenu_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
+		void ToggleMenus();
 	};
 }

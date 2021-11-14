@@ -39,16 +39,6 @@ template<typename T>
     return ref new ::Platform::Box<T>((T)userType->CreateEnumUIntFromString(input));
 }
 
-enum TypeInfo_Flags
-{
-    TypeInfo_Flags_None                 = 0x00,
-    TypeInfo_Flags_IsLocalType          = 0x01,
-    TypeInfo_Flags_IsSystemType         = 0x02,
-    TypeInfo_Flags_IsReturnTypeStub     = 0x04,
-    TypeInfo_Flags_IsBindable           = 0x08,
-    TypeInfo_Flags_IsMarkupExtension    = 0x10, 
-};
-
 struct TypeInfo
 {
     PCWSTR  typeName;
@@ -60,40 +50,42 @@ struct TypeInfo
     int     baseTypeIndex;
     int     firstMemberIndex;
     int     firstEnumValueIndex;
-    int     createFromStringIndex;
     ::Windows::UI::Xaml::Interop::TypeKind kindofType;
-    unsigned int flags;
+    bool    isLocalType;
+    bool    isSystemType;
+    bool    isReturnTypeStub;
+    bool    isBindable;
 };
 
-const TypeInfo TypeInfos[] = 
+TypeInfo TypeInfos[] = 
 {
     //   0
     L"Browser.MainPage", L"",
     &ActivateType<::Browser::MainPage>, nullptr, nullptr, nullptr,
     1, // Windows.UI.Xaml.Controls.Page
-    0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    TypeInfo_Flags_IsLocalType | TypeInfo_Flags_None,
+    0, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    true,  false, false, false,
     //   1
     L"Windows.UI.Xaml.Controls.Page", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
-    TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
+    0, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    false, true,  false, false,
     //   2
     L"Windows.UI.Xaml.Controls.UserControl", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
-    0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
-    TypeInfo_Flags_IsSystemType | TypeInfo_Flags_None,
+    0, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
+    false, true,  false, false,
     //  Last type here is for padding
     L"", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1, 
-    0, 0, -1, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
-    TypeInfo_Flags_None,
+    0, 0,::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    false, false, false, false,
 };
 
-const UINT TypeInfoLookup[] = { 
+UINT TypeInfoLookup[] = { 
       0,   //   0
       0,   //   1
       0,   //   2
@@ -134,9 +126,9 @@ const UINT TypeInfoLookup[] = {
       3,   //  37
 };
 
-const TypeInfo* GetTypeInfo(::Platform::String^ typeName)
+TypeInfo* GetTypeInfo(::Platform::String^ typeName)
 {
-    auto typeNameLength = typeName->Length();
+    int typeNameLength = typeName->Length();
     if (typeNameLength < _countof(TypeInfoLookup) - 1)
     {
         for (UINT i = TypeInfoLookup[typeNameLength]; i < TypeInfoLookup[typeNameLength+1]; i++)
@@ -162,13 +154,13 @@ const TypeInfo* GetTypeInfo(::Platform::String^ typeName)
 
 ::Windows::UI::Xaml::Markup::IXamlType^ ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider::CreateXamlType(::Platform::String^ typeName)
 {
-    const TypeInfo* pTypeInfo = GetTypeInfo(typeName);
-    const TypeInfo* pNextTypeInfo = pTypeInfo + 1;
+    TypeInfo* pTypeInfo = GetTypeInfo(typeName);
+    TypeInfo* pNextTypeInfo = pTypeInfo + 1;
     if (pTypeInfo == nullptr || pNextTypeInfo == nullptr)
     {
         return nullptr;
     }
-    else if (pTypeInfo->flags & TypeInfo_Flags_IsSystemType)
+    else if (pTypeInfo->isSystemType)
     {
         return ref new ::XamlTypeInfo::InfoProvider::XamlSystemBaseType(typeName);
     }
@@ -184,11 +176,9 @@ const TypeInfo* GetTypeInfo(::Platform::String^ typeName)
         userType->DictionaryAdd = pTypeInfo->dictionaryAdd;
         userType->FromStringConverter = pTypeInfo->fromStringConverter;
         userType->ContentPropertyName = ::Platform::StringReference(pTypeInfo->contentPropertyName);
-        userType->IsLocalType = pTypeInfo->flags & TypeInfo_Flags_IsLocalType;
-        userType->IsReturnTypeStub = pTypeInfo->flags & TypeInfo_Flags_IsReturnTypeStub;
-        userType->IsBindable = pTypeInfo->flags & TypeInfo_Flags_IsBindable;
-        userType->IsMarkupExtension = pTypeInfo->flags & TypeInfo_Flags_IsMarkupExtension;
-        userType->CreateFromStringMethod = nullptr;
+        userType->IsLocalType = pTypeInfo->isLocalType;
+        userType->IsReturnTypeStub = pTypeInfo->isReturnTypeStub;
+        userType->IsBindable = pTypeInfo->isBindable;
         return userType;
     }
 }

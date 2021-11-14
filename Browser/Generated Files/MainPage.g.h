@@ -11,8 +11,11 @@ namespace Windows {
     namespace UI {
         namespace Xaml {
             namespace Controls {
+                ref class ListView;
+                ref class Grid;
                 ref class Button;
                 ref class TextBox;
+                ref class ListViewItem;
                 ref class WebView;
                 ref class ProgressBar;
             }
@@ -33,16 +36,14 @@ namespace Browser
         virtual ::Windows::UI::Xaml::Markup::IComponentConnector^ GetBindingConnector(int connectionId, ::Platform::Object^ target);
     
     private:
-        void UnloadObject(::Windows::UI::Xaml::DependencyObject^ dependencyObject);
-        void DisconnectUnloadedObject(int connectionId);
-    
-    private:
         bool _contentLoaded;
     
-    
+        private: ::Windows::UI::Xaml::Controls::ListView^ PopupMenu;
+        private: ::Windows::UI::Xaml::Controls::Grid^ QuickActionsMenu;
         private: ::Windows::UI::Xaml::Controls::Button^ Tabs;
         private: ::Windows::UI::Xaml::Controls::TextBox^ Addressbar;
         private: ::Windows::UI::Xaml::Controls::Button^ Menu;
+        private: ::Windows::UI::Xaml::Controls::ListViewItem^ AboutBtn;
         private: ::Windows::UI::Xaml::Controls::WebView^ WebView;
         private: ::Windows::UI::Xaml::Controls::ProgressBar^ BrowserProgress;
     };

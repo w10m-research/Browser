@@ -13,7 +13,6 @@
 extern "C" __declspec(dllimport) int __stdcall IsDebuggerPresent();
 #endif
 
-
 #if (defined(_M_IX86) || defined(_M_AMD64)) && !defined(_VSDESIGNER_DONT_LOAD_AS_DLL)
 #if defined(_M_IX86)
 #pragma comment(linker, "/EXPORT:DllGetActivationFactory=_DllGetActivationFactory@8,PRIVATE")
@@ -58,28 +57,28 @@ void ::Browser::App::InitializeComponent()
 #endif
 }
 
+
 ::Windows::UI::Xaml::Markup::IXamlType^ ::Browser::App::GetXamlType(::Windows::UI::Xaml::Interop::TypeName type)
 {
-    return _AppProvider->GetXamlTypeByType(type);
+    if(_provider == nullptr)
+    {
+        _provider = ref new XamlTypeInfo::InfoProvider::XamlTypeInfoProvider();
+    }
+    return _provider->GetXamlTypeByType(type);
 }
 
 ::Windows::UI::Xaml::Markup::IXamlType^ ::Browser::App::GetXamlType(::Platform::String^ fullName)
 {
-    return _AppProvider->GetXamlTypeByName(fullName);
+    if(_provider == nullptr)
+    {
+        _provider = ref new XamlTypeInfo::InfoProvider::XamlTypeInfoProvider();
+    }
+    return _provider->GetXamlTypeByName(fullName);
 }
 
 ::Platform::Array<::Windows::UI::Xaml::Markup::XmlnsDefinition>^ ::Browser::App::GetXmlnsDefinitions()
 {
     return ref new ::Platform::Array<::Windows::UI::Xaml::Markup::XmlnsDefinition>(0);
-}
-
-::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider^ ::Browser::App::_AppProvider::get()
-{
-    if (__provider == nullptr)
-    {
-        __provider = ref new ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider();
-    }
-    return __provider;
 }
 
 #ifndef DISABLE_XAML_GENERATED_MAIN

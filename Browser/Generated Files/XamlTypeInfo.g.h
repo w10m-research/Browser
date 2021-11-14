@@ -239,13 +239,11 @@ namespace XamlTypeInfo
             typedef ::Platform::Object^ (*ActivatorFn)();
             typedef void (*AddToCollectionFn)(::Platform::Object^ instance, ::Platform::Object^ item);
             typedef void (*AddToDictionaryFn)(::Platform::Object^ instance, ::Platform::Object^ key, ::Platform::Object^ item);
-            typedef ::Platform::Object^ (*CreateFromStringFn)(::Platform::String^);
             typedef ::Platform::Object^ (*StringConverterFn)(::XamlTypeInfo::InfoProvider::XamlUserType^ userType, ::Platform::String^ input);
 
             property ActivatorFn Activator;
             property AddToCollectionFn CollectionAdd;
             property AddToDictionaryFn DictionaryAdd;
-            property CreateFromStringFn CreateFromStringMethod;
             property ::Windows::UI::Xaml::Interop::TypeKind KindOfType;
             property StringConverterFn FromStringConverter;
 
@@ -350,3 +348,4 @@ namespace XamlTypeInfo
         };
     }
 }
+

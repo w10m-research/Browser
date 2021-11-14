@@ -11,55 +11,6 @@
 #include "XamlTypeInfo.g.h"
 
 
-// XamlMetaDataProvider
-namespace Browser
-{
-    namespace Browser_XamlTypeInfo
-    {
-        [Windows::Foundation::Metadata::WebHostHidden]
-        public ref class XamlMetaDataProvider sealed : public ::Windows::UI::Xaml::Markup::IXamlMetadataProvider
-        {
-        public:
-            [::Windows::Foundation::Metadata::DefaultOverload]
-            virtual ::Windows::UI::Xaml::Markup::IXamlType^ GetXamlType(::Windows::UI::Xaml::Interop::TypeName type);
-            virtual ::Windows::UI::Xaml::Markup::IXamlType^ GetXamlType(::Platform::String^ fullName);
-            virtual ::Platform::Array<::Windows::UI::Xaml::Markup::XmlnsDefinition>^ GetXmlnsDefinitions();
-            
-        private:
-            ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider^ _provider;
-            property ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider^ Provider
-            {
-                ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider^ get();
-            }
-        };
-    }
-    
-}
-
-[::Windows::Foundation::Metadata::DefaultOverload]
-::Windows::UI::Xaml::Markup::IXamlType^ ::Browser::Browser_XamlTypeInfo::XamlMetaDataProvider::GetXamlType(::Windows::UI::Xaml::Interop::TypeName type)
-{
-    return Provider->GetXamlTypeByType(type);
-}
-
-::Windows::UI::Xaml::Markup::IXamlType^ ::Browser::Browser_XamlTypeInfo::XamlMetaDataProvider::GetXamlType(Platform::String^ fullName)
-{
-    return Provider->GetXamlTypeByName(fullName);
-}
-
-Platform::Array<::Windows::UI::Xaml::Markup::XmlnsDefinition>^ ::Browser::Browser_XamlTypeInfo::XamlMetaDataProvider::GetXmlnsDefinitions()
-{
-    return ref new Platform::Array<::Windows::UI::Xaml::Markup::XmlnsDefinition>(0);
-}
-
-::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider^ ::Browser::Browser_XamlTypeInfo::XamlMetaDataProvider::Provider::get()
-{
-    if (_provider == nullptr)
-    {
-        _provider = ref new XamlTypeInfo::InfoProvider::XamlTypeInfoProvider();
-    }
-    return _provider;
-}
 
 // XamlTypeInfoProvider
 ::Windows::UI::Xaml::Markup::IXamlType^ ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider::GetXamlTypeByType(::Windows::UI::Xaml::Interop::TypeName type)
@@ -486,14 +437,7 @@ void ::XamlTypeInfo::InfoProvider::XamlUserType::RunInitializer()
 
 ::Platform::Object^ ::XamlTypeInfo::InfoProvider::XamlUserType::CreateFromString(::Platform::String^ input)
 {
-    if (CreateFromStringMethod != nullptr)
-    {
-        return (*CreateFromStringMethod)(input);
-    }
-    else
-    {
-        return FromStringConverter(this, input);
-    }
+    return FromStringConverter(this, input);
 }
 
 void ::XamlTypeInfo::InfoProvider::XamlUserType::AddMemberName(::Platform::String^ shortName)

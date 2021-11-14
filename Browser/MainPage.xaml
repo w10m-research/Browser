@@ -8,16 +8,11 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Page.Resources>
-        <MenuFlyout x:Key="globalMenu">
-            <MenuFlyoutItem Text="Pin this page to Start" Tag="pin" />
-            <MenuFlyoutItem Text="Settings" Tag="settings" />
-        </MenuFlyout>
-    </Page.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="45"></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -28,19 +23,34 @@
             </Grid.RowDefinitions>
 
             <!-- TODO: Replace with Servo webview -->
-            <WebView Grid.Row="0" x:Name="WebView" NavigationCompleted="WebView_FrameNavigationCompleted" DefaultBackgroundColor="White" />
+            <WebView Grid.Row="0" x:Name="WebView" GotFocus="WebView_GotFocus" NavigationStarting="WebView_NavigationStarting" NavigationCompleted="WebView_FrameNavigationCompleted" DefaultBackgroundColor="White" />
             
             <ProgressBar x:Name="BrowserProgress" Grid.Row="1" Value="50" />
         </Grid>
 
-        <Grid Grid.Row="1" Background="{ThemeResource AppBarBackgroundThemeBrush}" VerticalAlignment="Stretch" Padding="0" HorizontalAlignment="Stretch">
+        <!-- TODO: Figure out how to animate this -->
+        <ListView x:Name="PopupMenu" Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="{ThemeResource MenuFlyoutSeparatorThemeBrush}" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" SelectionChanged="PopupMenu_SelectionChanged">
+            <ListViewItem IsEnabled="False">Share</ListViewItem>
+            <!-- TODO: Replace "page" with "app" if the site supports PWA. -->
+            <ListViewItem IsEnabled="False">Pin this page to Start</ListViewItem>
+            <ListViewItem x:Name="AboutBtn" Tapped="AboutBtn_Tapped">Visit project's GitHub</ListViewItem>
+            <ListViewItem IsEnabled="False">Settings</ListViewItem>
+        </ListView>
+
+        <Grid x:Name="QuickActionsMenu" Grid.Row="2" Height="0" Background="{ThemeResource AppBarBackgroundThemeBrush}" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="45"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+        </Grid>
+
+        <Grid Grid.Row="3" Background="{ThemeResource AppBarBackgroundThemeBrush}" VerticalAlignment="Stretch" Padding="0" HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="45"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="45"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="Tabs" Grid.Column="0" Background="Transparent" Margin="0" Padding="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="Tabs_Click">
+            <Button x:Name="Tabs" Grid.Column="0" Background="Transparent" Margin="0" Padding="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="Tabs_Click" IsEnabled="False">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8A9;" HorizontalAlignment="Stretch" Height="20" Margin="0,0,0,0" VerticalAlignment="Bottom" />
             </Button>
 

@@ -15,17 +15,13 @@ namespace Browser
     {
     public:
         void InitializeComponent();
-        [::Windows::Foundation::Metadata::DefaultOverload]
+        [Windows::Foundation::Metadata::DefaultOverload]
         virtual ::Windows::UI::Xaml::Markup::IXamlType^ GetXamlType(::Windows::UI::Xaml::Interop::TypeName type);
         virtual ::Windows::UI::Xaml::Markup::IXamlType^ GetXamlType(::Platform::String^ fullName);
         virtual ::Platform::Array<::Windows::UI::Xaml::Markup::XmlnsDefinition>^ GetXmlnsDefinitions();
     private:
-        ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider^ __provider; 
+        ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider^ _provider;
         bool _contentLoaded;
-        property ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider^ _AppProvider
-        {
-            ::XamlTypeInfo::InfoProvider::XamlTypeInfoProvider^ get();
-        }
     };
 }
 
