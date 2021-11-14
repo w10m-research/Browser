@@ -71,6 +71,13 @@ void ::Browser::MainPage::Connect(int __connectionId, ::Platform::Object^ __targ
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::AboutBtn_Click);
             }
             break;
+        case 7:
+            {
+                this->SettingsBtn = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(this->SettingsBtn))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Browser::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::SettingsBtn_Click);
+            }
+            break;
     }
     _contentLoaded = true;
 }

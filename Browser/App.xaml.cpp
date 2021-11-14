@@ -88,6 +88,11 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
             Window::Current->Activate();
         }
     }
+
+	Windows::UI::Core::SystemNavigationManager::GetForCurrentView()->
+		BackRequested += ref new Windows::Foundation::EventHandler<
+		Windows::UI::Core::BackRequestedEventArgs^>(
+			this, &App::App_BackRequested);
 }
 
 /// <summary>
@@ -113,4 +118,21 @@ void App::OnSuspending(Object^ sender, SuspendingEventArgs^ e)
 void App::OnNavigationFailed(Platform::Object ^sender, Windows::UI::Xaml::Navigation::NavigationFailedEventArgs ^e)
 {
     throw ref new FailureException("Failed to load Page " + e->SourcePageType.Name);
+}
+
+void App::App_BackRequested(
+	Platform::Object^ sender,
+	Windows::UI::Core::BackRequestedEventArgs^ e)
+{
+	Frame^ rootFrame = dynamic_cast<Frame^>(Window::Current->Content);
+	if (rootFrame == nullptr)
+		return;
+
+	// Navigate back if possible, and if the event has not
+	// already been handled.
+	if (rootFrame->CanGoBack && e->Handled == false)
+	{
+		e->Handled = true;
+		rootFrame->GoBack();
+	}
 }

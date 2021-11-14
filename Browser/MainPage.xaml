@@ -46,7 +46,7 @@
                 <AppBarButton x:Name="RefreshBtn" Icon="Refresh" Label="Reload" Click="RefreshBtn_Click" />
                 <AppBarButton Icon="ReShare" Label="Share" IsEnabled="false"/>
                 <AppBarButton x:Name="AboutBtn" Icon="Emoji" Label="Visit project's GitHub" Click="AboutBtn_Click"/>
-                <AppBarButton Icon="Setting" Label="Settings" IsEnabled="False"/>
+                <AppBarButton x:Name="SettingsBtn" Icon="Setting" Label="Settings" Click="SettingsBtn_Click"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

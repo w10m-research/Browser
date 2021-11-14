@@ -5,6 +5,7 @@
 
 #include "pch.h"
 #include "MainPage.xaml.h"
+#include "SettingsPage.xaml.h"
 
 using namespace Browser;
 
@@ -16,6 +17,7 @@ using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Controls::Primitives;
 using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Input;
+using namespace Windows::UI::Xaml::Interop;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
 using namespace concurrency;
@@ -88,6 +90,10 @@ void Browser::MainPage::WebView_FrameNavigationCompleted(Windows::UI::Xaml::Cont
 	corejs->SetAt(0, L"var script=document.createElement('script');script.src='https://cdnjs.cloudflare.com/ajax/libs/core-js/3.19.1/minified.min.js';document.head.appendChild(script);");
 	create_task(WebView->InvokeScriptAsync("eval", corejs));
 
+	auto cssvar = ref new Platform::Collections::Vector<String^>(1);
+	cssvar->SetAt(0, L"var script=document.createElement('script');script.src='https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2.4.7/dist/css-vars-ponyfill.min.js';document.head.appendChild(script);");
+	create_task(WebView->InvokeScriptAsync("eval", cssvar));
+
 	// TODO: only display the url if we're not on a search url (eg google.com/search?q=xxxx).
 	Addressbar->Text = WebView->Source->DisplayUri;
 
@@ -126,4 +132,10 @@ void Browser::MainPage::AboutBtn_Click(Platform::Object^ sender, Windows::UI::Xa
 void Browser::MainPage::RefreshBtn_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	WebView->Navigate(WebView->BaseUri);
+}
+
+
+void Browser::MainPage::SettingsBtn_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	Frame->Navigate(TypeName(SettingsPage::typeid));
 }

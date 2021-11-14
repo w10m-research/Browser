@@ -16,6 +16,7 @@ namespace Browser
 	{
 	protected:
 		virtual void OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEventArgs^ e) override;
+		void App_BackRequested(Platform::Object ^ sender, Windows::UI::Core::BackRequestedEventArgs ^ e);
 
 	internal:
 		App();

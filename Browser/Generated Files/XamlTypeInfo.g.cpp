@@ -11,9 +11,11 @@
 
 #include "App.xaml.h"
 #include "MainPage.xaml.h"
+#include "SettingsPage.xaml.h"
 #include "XamlBindingInfo.g.hpp"
 #include "App.g.hpp"
 #include "MainPage.g.hpp"
+#include "SettingsPage.g.hpp"
 
 template<typename T>
 ::Platform::Object^ ActivateType()
@@ -62,16 +64,22 @@ TypeInfo TypeInfos[] =
     //   0
     L"Browser.MainPage", L"",
     &ActivateType<::Browser::MainPage>, nullptr, nullptr, nullptr,
-    1, // Windows.UI.Xaml.Controls.Page
+    2, // Windows.UI.Xaml.Controls.Page
     0, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //   1
+    L"Browser.SettingsPage", L"",
+    &ActivateType<::Browser::SettingsPage>, nullptr, nullptr, nullptr,
+    2, // Windows.UI.Xaml.Controls.Page
+    0, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    true,  false, false, false,
+    //   2
     L"Windows.UI.Xaml.Controls.Page", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
     0, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
-    //   2
+    //   3
     L"Windows.UI.Xaml.Controls.UserControl", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
@@ -107,23 +115,23 @@ UINT TypeInfoLookup[] = {
       1,   //  18
       1,   //  19
       1,   //  20
-      1,   //  21
-      1,   //  22
-      1,   //  23
-      1,   //  24
-      1,   //  25
-      1,   //  26
-      1,   //  27
-      1,   //  28
-      1,   //  29
-      2,   //  30
-      2,   //  31
-      2,   //  32
-      2,   //  33
-      2,   //  34
-      2,   //  35
-      2,   //  36
-      3,   //  37
+      2,   //  21
+      2,   //  22
+      2,   //  23
+      2,   //  24
+      2,   //  25
+      2,   //  26
+      2,   //  27
+      2,   //  28
+      2,   //  29
+      3,   //  30
+      3,   //  31
+      3,   //  32
+      3,   //  33
+      3,   //  34
+      3,   //  35
+      3,   //  36
+      4,   //  37
 };
 
 TypeInfo* GetTypeInfo(::Platform::String^ typeName)
