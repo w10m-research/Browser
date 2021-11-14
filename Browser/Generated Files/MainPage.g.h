@@ -11,13 +11,10 @@ namespace Windows {
     namespace UI {
         namespace Xaml {
             namespace Controls {
-                ref class ListView;
-                ref class Grid;
-                ref class Button;
-                ref class TextBox;
-                ref class ListViewItem;
                 ref class WebView;
                 ref class ProgressBar;
+                ref class AppBarButton;
+                ref class TextBox;
             }
         }
     }
@@ -38,14 +35,12 @@ namespace Browser
     private:
         bool _contentLoaded;
     
-        private: ::Windows::UI::Xaml::Controls::ListView^ PopupMenu;
-        private: ::Windows::UI::Xaml::Controls::Grid^ QuickActionsMenu;
-        private: ::Windows::UI::Xaml::Controls::Button^ Tabs;
-        private: ::Windows::UI::Xaml::Controls::TextBox^ Addressbar;
-        private: ::Windows::UI::Xaml::Controls::Button^ Menu;
-        private: ::Windows::UI::Xaml::Controls::ListViewItem^ AboutBtn;
         private: ::Windows::UI::Xaml::Controls::WebView^ WebView;
         private: ::Windows::UI::Xaml::Controls::ProgressBar^ BrowserProgress;
+        private: ::Windows::UI::Xaml::Controls::AppBarButton^ TabsBtn;
+        private: ::Windows::UI::Xaml::Controls::TextBox^ Addressbar;
+        private: ::Windows::UI::Xaml::Controls::AppBarButton^ RefreshBtn;
+        private: ::Windows::UI::Xaml::Controls::AppBarButton^ AboutBtn;
     };
 }
 

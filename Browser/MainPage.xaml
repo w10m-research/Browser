@@ -8,57 +8,46 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="45"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="White">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-            </Grid.RowDefinitions>
+        <!-- TODO: Replace with Servo webview -->
+        <WebView Grid.Row="0" x:Name="WebView" NavigationStarting="WebView_NavigationStarting" NavigationCompleted="WebView_FrameNavigationCompleted" DefaultBackgroundColor="White" />
 
-            <!-- TODO: Replace with Servo webview -->
-            <WebView Grid.Row="0" x:Name="WebView" GotFocus="WebView_GotFocus" NavigationStarting="WebView_NavigationStarting" NavigationCompleted="WebView_FrameNavigationCompleted" DefaultBackgroundColor="White" />
-            
-            <ProgressBar x:Name="BrowserProgress" Grid.Row="1" Value="50" />
-        </Grid>
-
-        <!-- TODO: Figure out how to animate this -->
-        <ListView x:Name="PopupMenu" Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="{ThemeResource MenuFlyoutSeparatorThemeBrush}" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" SelectionChanged="PopupMenu_SelectionChanged">
-            <ListViewItem IsEnabled="False">Share</ListViewItem>
-            <!-- TODO: Replace "page" with "app" if the site supports PWA. -->
-            <ListViewItem IsEnabled="False">Pin this page to Start</ListViewItem>
-            <ListViewItem x:Name="AboutBtn" Tapped="AboutBtn_Tapped">Visit project's GitHub</ListViewItem>
-            <ListViewItem IsEnabled="False">Settings</ListViewItem>
-        </ListView>
-
-        <Grid x:Name="QuickActionsMenu" Grid.Row="2" Height="0" Background="{ThemeResource AppBarBackgroundThemeBrush}" HorizontalAlignment="Stretch">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="45"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-        </Grid>
-
-        <Grid Grid.Row="3" Background="{ThemeResource AppBarBackgroundThemeBrush}" VerticalAlignment="Stretch" Padding="0" HorizontalAlignment="Stretch">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="45"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="45"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-
-            <Button x:Name="Tabs" Grid.Column="0" Background="Transparent" Margin="0" Padding="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="Tabs_Click" IsEnabled="False">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8A9;" HorizontalAlignment="Stretch" Height="20" Margin="0,0,0,0" VerticalAlignment="Bottom" />
-            </Button>
-
-            <TextBox x:Name="Addressbar" InputScope="Url" Grid.Column="1" GotFocus="Addressbar_GotFocus" KeyDown="Addressbar_KeyDown" PlaceholderText="Search or browser" VerticalAlignment="Center" Margin="10 0"  Background="Transparent" BorderBrush="Transparent" />
-
-            <Button x:Name="Menu" Grid.Column="2" Background="Transparent" Margin="0" Padding="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="Menu_Click">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE10C;" HorizontalAlignment="Stretch" Height="20" Margin="0,0,0,0" VerticalAlignment="Bottom" />
-            </Button>
-        </Grid>
+        <ProgressBar x:Name="BrowserProgress" Grid.Row="1" Value="50" />
     </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar
+            VerticalContentAlignment="Stretch"
+            HorizontalContentAlignment="Stretch">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="TabsBtn" Icon="AllApps" Label="Tabs" Click="Tabs_Click"/>
+            </CommandBar.PrimaryCommands>
+            <CommandBar.Content>
+                <TextBox
+                    x:Name="Addressbar"
+                    Grid.Column="1"
+                    InputScope="Url"
+                    GotFocus="Addressbar_GotFocus"
+                    KeyDown="Addressbar_KeyDown"
+                    PlaceholderText="Search or browser"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    Height="{ThemeResource AppBarThemeCompactHeight}"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    />
+            </CommandBar.Content>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="RefreshBtn" Icon="Refresh" Label="Reload" Click="RefreshBtn_Click" />
+                <AppBarButton Icon="ReShare" Label="Share" IsEnabled="false"/>
+                <AppBarButton x:Name="AboutBtn" Icon="Emoji" Label="Visit project's GitHub" Click="AboutBtn_Click"/>
+                <AppBarButton Icon="Setting" Label="Settings" IsEnabled="False"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

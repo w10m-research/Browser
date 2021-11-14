@@ -29,20 +29,22 @@ void ::Browser::MainPage::Connect(int __connectionId, ::Platform::Object^ __targ
     {
         case 1:
             {
-                this->PopupMenu = safe_cast<::Windows::UI::Xaml::Controls::ListView^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::ListView^>(this->PopupMenu))->SelectionChanged += ref new ::Windows::UI::Xaml::Controls::SelectionChangedEventHandler(this, (void (::Browser::MainPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::Controls::SelectionChangedEventArgs^))&MainPage::PopupMenu_SelectionChanged);
+                this->WebView = safe_cast<::Windows::UI::Xaml::Controls::WebView^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::WebView^>(this->WebView))->NavigationStarting += ref new ::Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::Controls::WebView^, ::Windows::UI::Xaml::Controls::WebViewNavigationStartingEventArgs^>(this, (void (::Browser::MainPage::*)
+                    (::Windows::UI::Xaml::Controls::WebView^, ::Windows::UI::Xaml::Controls::WebViewNavigationStartingEventArgs^))&MainPage::WebView_NavigationStarting);
+                (safe_cast<::Windows::UI::Xaml::Controls::WebView^>(this->WebView))->NavigationCompleted += ref new ::Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::Controls::WebView^, ::Windows::UI::Xaml::Controls::WebViewNavigationCompletedEventArgs^>(this, (void (::Browser::MainPage::*)
+                    (::Windows::UI::Xaml::Controls::WebView^, ::Windows::UI::Xaml::Controls::WebViewNavigationCompletedEventArgs^))&MainPage::WebView_FrameNavigationCompleted);
             }
             break;
         case 2:
             {
-                this->QuickActionsMenu = safe_cast<::Windows::UI::Xaml::Controls::GridView^>(__target);
+                this->BrowserProgress = safe_cast<::Windows::UI::Xaml::Controls::ProgressBar^>(__target);
             }
             break;
         case 3:
             {
-                this->Tabs = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->Tabs))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Browser::MainPage::*)
+                this->TabsBtn = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(this->TabsBtn))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Browser::MainPage::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::Tabs_Click);
             }
             break;
@@ -57,32 +59,16 @@ void ::Browser::MainPage::Connect(int __connectionId, ::Platform::Object^ __targ
             break;
         case 5:
             {
-                this->Menu = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->Menu))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Browser::MainPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::Menu_Click);
+                this->RefreshBtn = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(this->RefreshBtn))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Browser::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::RefreshBtn_Click);
             }
             break;
         case 6:
             {
-                this->AboutBtn = safe_cast<::Windows::UI::Xaml::Controls::ListViewItem^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::ListViewItem^>(this->AboutBtn))->Tapped += ref new ::Windows::UI::Xaml::Input::TappedEventHandler(this, (void (::Browser::MainPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::Input::TappedRoutedEventArgs^))&MainPage::AboutBtn_Tapped);
-            }
-            break;
-        case 7:
-            {
-                this->WebView = safe_cast<::Windows::UI::Xaml::Controls::WebView^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::WebView^>(this->WebView))->GotFocus += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Browser::MainPage::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::WebView_GotFocus);
-                (safe_cast<::Windows::UI::Xaml::Controls::WebView^>(this->WebView))->NavigationStarting += ref new ::Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::Controls::WebView^, ::Windows::UI::Xaml::Controls::WebViewNavigationStartingEventArgs^>(this, (void (::Browser::MainPage::*)
-                    (::Windows::UI::Xaml::Controls::WebView^, ::Windows::UI::Xaml::Controls::WebViewNavigationStartingEventArgs^))&MainPage::WebView_NavigationStarting);
-                (safe_cast<::Windows::UI::Xaml::Controls::WebView^>(this->WebView))->NavigationCompleted += ref new ::Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::Controls::WebView^, ::Windows::UI::Xaml::Controls::WebViewNavigationCompletedEventArgs^>(this, (void (::Browser::MainPage::*)
-                    (::Windows::UI::Xaml::Controls::WebView^, ::Windows::UI::Xaml::Controls::WebViewNavigationCompletedEventArgs^))&MainPage::WebView_FrameNavigationCompleted);
-            }
-            break;
-        case 8:
-            {
-                this->BrowserProgress = safe_cast<::Windows::UI::Xaml::Controls::ProgressBar^>(__target);
+                this->AboutBtn = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(this->AboutBtn))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Browser::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::AboutBtn_Click);
             }
             break;
     }

@@ -44,18 +44,10 @@ MainPage::MainPage()
 	// Initialize 
 	BrowserProgress->Value = 0;
 	BrowserProgress->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
-	PopupMenu->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
-}
-
-void Browser::MainPage::Menu_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
-{
-	ToggleMenus();
 }
 
 void Browser::MainPage::Addressbar_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e)
 {
-	// Close menu(s)
-	PopupMenu->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
 
 	if (e->Key != Windows::System::VirtualKey::Enter)
 		return;
@@ -118,11 +110,6 @@ void Browser::MainPage::Addressbar_GotFocus(Platform::Object^ sender, Windows::U
 	Addressbar->SelectAll();
 }
 
-void Browser::MainPage::WebView_GotFocus(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
-{
-	PopupMenu->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
-}
-
 void Browser::MainPage::WebView_NavigationStarting(Windows::UI::Xaml::Controls::WebView^ sender, Windows::UI::Xaml::Controls::WebViewNavigationStartingEventArgs^ args)
 {
 	// TODO: Progressbar.
@@ -130,24 +117,13 @@ void Browser::MainPage::WebView_NavigationStarting(Windows::UI::Xaml::Controls::
 	BrowserProgress->Visibility = Windows::UI::Xaml::Visibility::Visible;
 }
 
-void Browser::MainPage::AboutBtn_Tapped(Platform::Object^ sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs^ e)
+void Browser::MainPage::AboutBtn_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	Navigate_To(WebView, L"https://github.com/w10m-research/Browser");
 }
 
 
-void Browser::MainPage::PopupMenu_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e)
+void Browser::MainPage::RefreshBtn_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	PopupMenu->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
-}
-
-void Browser::MainPage::ToggleMenus() {
-	if (PopupMenu->Visibility == Windows::UI::Xaml::Visibility::Visible) {
-		PopupMenu->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
-		QuickActionsMenu->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
-	}
-	else {
-		PopupMenu->Visibility = Windows::UI::Xaml::Visibility::Visible;
-		QuickActionsMenu->Visibility = Windows::UI::Xaml::Visibility::Visible;
-	}
+	WebView->Navigate(WebView->BaseUri);
 }
