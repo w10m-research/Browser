@@ -73,6 +73,13 @@ void ::Browser::MainPage::Connect(int __connectionId, ::Platform::Object^ __targ
             break;
         case 7:
             {
+                this->HistoryBtn = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(this->HistoryBtn))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Browser::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::HistoryBtn_Click);
+            }
+            break;
+        case 8:
+            {
                 this->SettingsBtn = safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::AppBarButton^>(this->SettingsBtn))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Browser::MainPage::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::SettingsBtn_Click);

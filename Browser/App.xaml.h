@@ -6,6 +6,9 @@
 #pragma once
 
 #include "App.g.h"
+#include "BrowserState.h"
+
+extern BrowserState *State;
 
 namespace Browser
 {

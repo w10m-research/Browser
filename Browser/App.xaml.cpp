@@ -22,6 +22,8 @@ using namespace Windows::UI::Xaml::Interop;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
 
+BrowserState *State;
+
 /// <summary>
 /// Initializes the singleton application object.  This is the first line of authored code
 /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -30,6 +32,9 @@ App::App()
 {
     InitializeComponent();
     Suspending += ref new SuspendingEventHandler(this, &App::OnSuspending);
+
+	// Setup new browser state.
+	State = new BrowserState();
 }
 
 /// <summary>
@@ -89,7 +94,7 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
         }
     }
 
-	// Handle back button
+	// Handle back button.
 	Windows::UI::Core::SystemNavigationManager::GetForCurrentView()->
 		BackRequested += ref new Windows::Foundation::EventHandler<
 		Windows::UI::Core::BackRequestedEventArgs^>(

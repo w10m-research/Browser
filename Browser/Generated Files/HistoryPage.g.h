@@ -11,10 +11,8 @@ namespace Windows {
     namespace UI {
         namespace Xaml {
             namespace Controls {
-                ref class WebView;
-                ref class ProgressBar;
-                ref class AppBarButton;
-                ref class TextBox;
+                ref class ListView;
+                ref class HyperlinkButton;
             }
         }
     }
@@ -23,7 +21,7 @@ namespace Windows {
 namespace Browser
 {
     [::Windows::Foundation::Metadata::WebHostHidden]
-    partial ref class MainPage : public ::Windows::UI::Xaml::Controls::Page, 
+    partial ref class HistoryPage : public ::Windows::UI::Xaml::Controls::Page, 
         public ::Windows::UI::Xaml::Markup::IComponentConnector,
         public ::Windows::UI::Xaml::Markup::IComponentConnector2
     {
@@ -35,14 +33,8 @@ namespace Browser
     private:
         bool _contentLoaded;
     
-        private: ::Windows::UI::Xaml::Controls::WebView^ WebView;
-        private: ::Windows::UI::Xaml::Controls::ProgressBar^ BrowserProgress;
-        private: ::Windows::UI::Xaml::Controls::AppBarButton^ TabsBtn;
-        private: ::Windows::UI::Xaml::Controls::TextBox^ Addressbar;
-        private: ::Windows::UI::Xaml::Controls::AppBarButton^ RefreshBtn;
-        private: ::Windows::UI::Xaml::Controls::AppBarButton^ AboutBtn;
-        private: ::Windows::UI::Xaml::Controls::AppBarButton^ HistoryBtn;
-        private: ::Windows::UI::Xaml::Controls::AppBarButton^ SettingsBtn;
+        private: ::Windows::UI::Xaml::Controls::ListView^ HistoryList;
+        private: ::Windows::UI::Xaml::Controls::HyperlinkButton^ ClearHistoryBtn;
     };
 }
 

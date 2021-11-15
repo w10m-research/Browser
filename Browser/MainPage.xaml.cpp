@@ -6,6 +6,7 @@
 #include "pch.h"
 #include "MainPage.xaml.h"
 #include "SettingsPage.xaml.h"
+#include "HistoryPage.xaml.h"
 #include "BrowserState.h"
 
 using namespace Browser;
@@ -34,7 +35,7 @@ MainPage::MainPage()
 	BrowserProgress->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
 
 	// Setup browser manager
-	this->State = new BrowserState(this->WebView);
+	State->SetWebView(this->WebView);
 }
 
 void Browser::MainPage::Addressbar_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e)
@@ -71,7 +72,8 @@ void Browser::MainPage::Addressbar_KeyDown(Platform::Object^ sender, Windows::UI
 
 void Browser::MainPage::WebView_FrameNavigationCompleted(Windows::UI::Xaml::Controls::WebView^ sender, Windows::UI::Xaml::Controls::WebViewNavigationCompletedEventArgs^ args)
 {
-	// TODO: handle alert
+	// TODO: handle alert in EdgeHTML.
+	auto url = WebView->Source->DisplayUri;
 
 	// Temporary pre-engine switch to servo
 	// Add polyfills
@@ -84,11 +86,15 @@ void Browser::MainPage::WebView_FrameNavigationCompleted(Windows::UI::Xaml::Cont
 	create_task(WebView->InvokeScriptAsync("eval", cssvar));
 
 	// TODO: only display the url if we're not on a search url (eg google.com/search?q=xxxx).
-	Addressbar->Text = WebView->Source->DisplayUri;
+	Addressbar->Text = url;
 
 	// Progressbar
 	BrowserProgress->Value = 100;
 	BrowserProgress->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+
+	// Push to history
+	// TODO: do this on navigation start.
+	State->PushHistory(url);
 }
 
 void Browser::MainPage::Tabs_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
@@ -121,11 +127,17 @@ void Browser::MainPage::AboutBtn_Click(Platform::Object^ sender, Windows::UI::Xa
 void Browser::MainPage::RefreshBtn_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	// TODO: user BrowserState
-	WebView->Navigate(WebView->BaseUri);
+	State->Reload();
 }
 
 
 void Browser::MainPage::SettingsBtn_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	Frame->Navigate(TypeName(SettingsPage::typeid));
+}
+
+
+void Browser::MainPage::HistoryBtn_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	Frame->Navigate(TypeName(HistoryPage::typeid));
 }

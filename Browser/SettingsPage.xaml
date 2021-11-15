@@ -9,7 +9,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Pivot Title="Settings">
-        <PivotItem Header="General"></PivotItem>
+        <PivotItem Header="General">
+            <TextBlock>TODO: Come back later :)</TextBlock>
+        </PivotItem>
         <PivotItem Header="Advanced">
             <StackPanel>
                 <TextBox x:Name="UserAgentStr" IsEnabled="false" HorizontalContentAlignment="Stretch" Header="User-agent (UA)" />

@@ -17,12 +17,14 @@
     <ClCompile Include="MainPage.xaml.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="BrowserState.cpp" />
+    <ClCompile Include="SettingsPage.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h" />
     <ClInclude Include="MainPage.xaml.h" />
     <ClInclude Include="BrowserState.h" />
+    <ClInclude Include="SettingsPage.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png">
@@ -173,5 +175,6 @@
   <ItemGroup>
     <Page Include="MainPage.xaml" />
     <Page Include="SettingsPage.xaml" />
+    <Page Include="HistoryPage.xaml" />
   </ItemGroup>
 </Project>

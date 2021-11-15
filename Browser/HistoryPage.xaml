@@ -1,0 +1,43 @@
+﻿<Page
+    x:Class="Browser.HistoryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Browser"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Pivot Title="History">
+        <PivotItem Header="All">
+            <ScrollViewer>
+                <StackPanel>
+                    <ListView x:Name="HistoryList">
+                        <ListViewItem>Entry</ListViewItem>
+                    </ListView>
+                    <HyperlinkButton x:Name="ClearHistoryBtn" Click="ClearHistoryBtn_Click">Clear history</HyperlinkButton>
+                </StackPanel>
+            </ScrollViewer>
+        </PivotItem>
+        <PivotItem Header="Today">
+            <StackPanel>
+                <TextBlock>TODO: Come back later :)</TextBlock>
+            </StackPanel>
+        </PivotItem>
+        <PivotItem Header="Yesterday">
+            <StackPanel>
+                <TextBlock>TODO: Come back later :)</TextBlock>
+            </StackPanel>
+        </PivotItem>
+        <PivotItem Header="This Week">
+            <StackPanel>
+                <TextBlock>TODO: Come back later :)</TextBlock>
+            </StackPanel>
+        </PivotItem>
+        <PivotItem Header="This Month">
+            <StackPanel>
+                <TextBlock>TODO: Come back later :)</TextBlock>
+            </StackPanel>
+        </PivotItem>
+    </Pivot>
+</Page>
