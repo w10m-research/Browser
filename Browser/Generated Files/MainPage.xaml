@@ -1,0 +1,56 @@
+﻿<Page
+    x:Class="Browser.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Browser"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    NavigationCacheMode="Required"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!-- TODO: Replace with Servo webview -->
+        <WebView x:ConnectionId='1' Grid.Row="0" x:Name="WebView"                                                                                                        DefaultBackgroundColor="White" />
+
+        <ProgressBar x:ConnectionId='2' x:Name="BrowserProgress" Grid.Row="1" Value="50" />
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar
+            VerticalContentAlignment="Stretch"
+            HorizontalContentAlignment="Stretch">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:ConnectionId='3' x:Name="TabsBtn" Icon="AllApps" Label="Tabs"                   />
+            </CommandBar.PrimaryCommands>
+            <CommandBar.Content>
+                <TextBox x:ConnectionId='4'
+                    x:Name="Addressbar"
+                    Grid.Column="1"
+                    InputScope="Url"
+                                                  
+                                                
+                    PlaceholderText="Search or browser"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    Height="{ThemeResource AppBarThemeCompactHeight}"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    />
+            </CommandBar.Content>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:ConnectionId='5' x:Name="RefreshBtn" Icon="Refresh" Label="Reload"                          />
+                <AppBarButton Icon="ReShare" Label="Share" IsEnabled="false"/>
+                <AppBarButton x:ConnectionId='6' x:Name="AboutBtn" Icon="Emoji" Label="Visit project's GitHub"                       />
+                <AppBarButton x:ConnectionId='7' x:Name="HistoryBtn" Icon="Bullets" Label="History"                         />
+                <AppBarButton x:ConnectionId='8' x:Name="SettingsBtn" Icon="Setting" Label="Settings"                          />
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
+

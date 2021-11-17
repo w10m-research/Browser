@@ -19,5 +19,6 @@ namespace Browser
 		HistoryPage();
 	private:
 		void ClearHistoryBtn_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void HistoryList_ItemClick(Platform::Object^ sender, Windows::UI::Xaml::Controls::ItemClickEventArgs^ e);
 	};
 }

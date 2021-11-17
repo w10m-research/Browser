@@ -30,6 +30,8 @@ void ::Browser::HistoryPage::Connect(int __connectionId, ::Platform::Object^ __t
         case 1:
             {
                 this->HistoryList = safe_cast<::Windows::UI::Xaml::Controls::ListView^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::ListView^>(this->HistoryList))->ItemClick += ref new ::Windows::UI::Xaml::Controls::ItemClickEventHandler(this, (void (::Browser::HistoryPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::Controls::ItemClickEventArgs^))&HistoryPage::HistoryList_ItemClick);
             }
             break;
         case 2:

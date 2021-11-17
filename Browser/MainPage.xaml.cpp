@@ -28,14 +28,14 @@ MainPage::MainPage()
 {
 	InitializeComponent();
 
-	// TODO: hide titlebar
-
 	// Initialize 
 	BrowserProgress->Value = 0;
 	BrowserProgress->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
 
 	// Setup browser manager
 	State->SetWebView(this->WebView);
+
+	// TODO: hook into back button
 }
 
 void Browser::MainPage::Addressbar_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e)

@@ -34,3 +34,12 @@ void Browser::HistoryPage::ClearHistoryBtn_Click(Platform::Object^ sender, Windo
 {
 	State->ClearHistory();
 }
+
+
+void Browser::HistoryPage::HistoryList_ItemClick(Platform::Object^ sender, Windows::UI::Xaml::Controls::ItemClickEventArgs^ e)
+{
+	auto item = e->ClickedItem;
+
+	//State->NavigateTo();
+	Frame->GoBack();
+}

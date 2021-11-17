@@ -12,10 +12,10 @@
         <PivotItem Header="All">
             <ScrollViewer>
                 <StackPanel>
-                    <ListView x:Name="HistoryList" ItemClick="HistoryList_ItemClick" IsItemClickEnabled="True">
+                    <ListView x:ConnectionId='1' x:Name="HistoryList"                                   IsItemClickEnabled="True">
                         <ListViewItem>Entry</ListViewItem>
                     </ListView>
-                    <HyperlinkButton x:Name="ClearHistoryBtn" Click="ClearHistoryBtn_Click">Clear history</HyperlinkButton>
+                    <HyperlinkButton x:ConnectionId='2' x:Name="ClearHistoryBtn"                              >Clear history</HyperlinkButton>
                 </StackPanel>
             </ScrollViewer>
         </PivotItem>
@@ -41,3 +41,4 @@
         </PivotItem>
     </Pivot>
 </Page>
+
