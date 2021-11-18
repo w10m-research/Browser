@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="e2e386d5-3e0e-4b20-afaf-283dfedebda1" Publisher="CN=Filiph Sandström" Version="1.0.0.0" />
+  <Identity Name="com.filiphsandstrom.rattmann" Publisher="CN=Filiph Sandström" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="e2e386d5-3e0e-4b20-afaf-283dfedebda1" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Browser</DisplayName>
@@ -30,15 +30,25 @@
           <uap:Rotation Preference="portraitFlipped" />
         </uap:InitialRotationPreference>
       </uap:VisualElements>
+      <Extensions>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="https">
+            <uap:DisplayName>HTTPS</uap:DisplayName>
+          </uap:Protocol>
+        </uap:Extension>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="http">
+            <uap:DisplayName>HTTP</uap:DisplayName>
+          </uap:Protocol>
+        </uap:Extension>
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
     <Capability Name="codeGeneration" />
     <Capability Name="internetClientServer" />
-    <uap:Capability Name="userAccountInformation" />
     <DeviceCapability Name="microphone" />
-    <DeviceCapability Name="webcam" />
     <DeviceCapability Name="location" />
   </Capabilities>
 </Package>
