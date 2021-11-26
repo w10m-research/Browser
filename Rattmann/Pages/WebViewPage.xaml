@@ -1,0 +1,66 @@
+﻿<Page
+    x:Class="Rattmann.Pages.WebViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Rattmann"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    NavigationCacheMode="Required">
+
+    <Grid
+        Background="White">
+
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar
+            IsDynamicOverflowEnabled="False"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch"
+            Height="50">
+            <CommandBar.Content>
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <AppBarButton
+                        Grid.Column="0"
+                        Icon="ViewAll"
+                        Height="50"
+                        Width="50"/>
+                    <AppBarSeparator Grid.Column="1" Margin="-7.5,2.5"/>
+                    <AppBarButton
+                        Grid.Column="2"
+                        Icon="Refresh"
+                        Height="50"
+                        Width="50"/>
+
+                    <TextBox
+                        Grid.Column="3"
+                        x:Name="AddressBar"
+                        PlaceholderText="Search or browse"
+                        VerticalContentAlignment="Center"
+                        VerticalAlignment="Center"
+                        BorderThickness="0"
+                        Background="Transparent"
+                        Height="50"
+                        Padding="0,12.5"
+                        FontSize="16"/>
+
+                    <AppBarSeparator Grid.Column="4" Margin="-7.5,2.5" />
+                </Grid>
+            </CommandBar.Content>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="Share" IsEnabled="False"/>
+                <AppBarButton Icon="Setting" Label="Settings" IsEnabled="False"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
