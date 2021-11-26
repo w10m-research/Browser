@@ -1,0 +1,83 @@
+﻿<Page
+    x:Class="Rattmann.Pages.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Rattmann.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.TopAppBar>
+        <CommandBar
+            HorizontalContentAlignment="Stretch"
+            IsDynamicOverflowEnabled="False"
+            OverflowButtonVisibility="Collapsed">
+            <CommandBar.Content>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <AppBarButton
+                        x:Name="BackBtn"
+                        Grid.Column="0"
+                        Icon="Back"
+                        Width="45"
+                        Click="BackBtn_OnClick"/>
+                    <ContentControl
+                        Grid.Column="1"
+                        Style="{ThemeResource PivotTitleContentControlStyle}"
+                        VerticalAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Margin="0,-10,0,0">
+                        <TextBlock>
+                            Settings
+                        </TextBlock>
+                    </ContentControl>
+                </Grid>
+            </CommandBar.Content>
+        </CommandBar>
+    </Page.TopAppBar>
+
+    <Pivot x:Name="RootPivot">
+        <PivotItem Header="General">
+            <ScrollViewer>
+                <StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </PivotItem>
+        <PivotItem Header="About">
+            <StackPanel>
+                <TextBlock
+                    Style="{ThemeResource SubtitleTextBlockStyle}">
+                    About this app
+                </TextBlock>
+                <TextBlock
+                    TextWrapping="Wrap">
+                    RattMann <Bold><Run x:Name="AppVersionStr" /></Bold>.
+                </TextBlock>
+                <TextBlock
+                    TextWrapping="Wrap">
+                    Servo <Bold>git-<Run x:Name="EngineVersionStr" /></Bold>.
+                </TextBlock>
+
+                <TextBlock
+                    Style="{ThemeResource SubtitleTextBlockStyle}"
+                    Margin="0,25,0,0">
+                    Credits
+                </TextBlock>
+                <TextBlock
+                    TextWrapping="Wrap">
+                    Servo engine by <Bold>The Servo Project Developers</Bold>.
+                </TextBlock>
+                <TextBlock
+                    LineHeight="16"
+                    TextWrapping="Wrap"
+                    FontFamily="Segoe MDL2 Assets">
+                    Rattmann is developed with <Run Text="&#xEB52;" Foreground="#FFD61C1C" FontSize="10" /> by <Bold>Filiph Sandström (@filiphsandstrom)</Bold>.
+                </TextBlock>
+            </StackPanel>
+        </PivotItem>
+    </Pivot>
+</Page>

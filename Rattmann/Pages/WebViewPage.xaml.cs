@@ -43,5 +43,9 @@ namespace Rattmann.Pages {
         private void TabsBtn_OnClick(Object sender, RoutedEventArgs e) {
             this.Frame.Navigate(typeof(Pages.TabsPage), null, new DrillInNavigationTransitionInfo());
         }
+
+        private void SettingsBtn_OnClick(Object sender, RoutedEventArgs e) {
+            this.Frame.Navigate(typeof(Pages.SettingsPage), null, new DrillInNavigationTransitionInfo());
+        }
     }
 }

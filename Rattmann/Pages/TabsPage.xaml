@@ -30,9 +30,9 @@
                         Style="{ThemeResource PivotTitleContentControlStyle}"
                         VerticalAlignment="Center"
                         VerticalContentAlignment="Center"
-                        Margin="0,-15,0,0">
+                        Margin="0,-10,0,0">
                         <TextBlock>
-                            TABS
+                            Tabs
                         </TextBlock>
                     </ContentControl>
                 </Grid>
@@ -47,18 +47,14 @@
                 <ColumnDefinition Width="0.5*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
+                <RowDefinition MinHeight="185" MaxHeight="185" />
             </Grid.RowDefinitions>
 
             <Grid
                 Grid.Row="0"
                 Grid.Column="0"
                 Margin="5"
-                BorderThickness="5,0,5,5"
-                BorderBrush="{ThemeResource ButtonBorderThemeBrush}">
+                Background="White">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="1*" />
@@ -67,18 +63,26 @@
                 <Grid
                     x:Name="TabItem"
                     Grid.Row="0"
-                    Background="{ThemeResource ButtonBorderThemeBrush}">
+                    Background="{ThemeResource AppBarBackground}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" />
+                    <Image
+                        Grid.Column="0"
+                        Height="20"
+                        Width="20"
+                        Margin="5"
+                        Source="ms-appx:///Assets/StoreLogo.png" />
                     <TextBlock
                         Grid.Column="1"
                         FontSize="16"
                         VerticalAlignment="Center"
-                        Padding="10,0">
+                        Padding="5,0"
+                        Margin="0,-2.5,0,0"
+                        TextAlignment="Left"
+                        Foreground="{ThemeResource AppBarButtonForeground}">
                         New tab
                     </TextBlock>
                     <AppBarButton
@@ -87,7 +91,8 @@
                         Margin="0,-5,0,0"
                         Width="35"
                         Height="35"
-                        IsCompact="True"/>
+                        IsCompact="True"
+                        Foreground="{ThemeResource AppBarButtonForeground}"/>
                 </Grid>
                 <Grid Grid.Row="1"></Grid>
             </Grid>

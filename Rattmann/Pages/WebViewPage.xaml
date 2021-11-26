@@ -182,7 +182,6 @@
             IsDynamicOverflowEnabled="False"
             HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"
-            Height="50"
             Margin="0,0,0,-2">
             <CommandBar.Content>
                 <Grid HorizontalAlignment="Stretch">
@@ -198,19 +197,17 @@
                         x:Name="TabsBtn"
                         Grid.Column="0"
                         Icon="ViewAll"
-                        Height="50"
-                        Width="50"
+                        Width="40"
                         Click="TabsBtn_OnClick"/>
                     <AppBarSeparator
                         x:Name="TabsSeparator"
                         Grid.Column="1"
-                        Margin="-7.5,2.5"/>
+                        Margin="-15,0"/>
                     <AppBarButton
                         x:Name="ReloadBtn"
                         Grid.Column="2"
                         Icon="Refresh"
-                        Height="50"
-                        Width="50"/>
+                        Width="40"/>
 
                     <TextBox
                         x:Name="AddressBar"
@@ -221,19 +218,19 @@
                         VerticalContentAlignment="Center"
                         VerticalAlignment="Center"
                         BorderThickness="0"
-                        Height="50"
-                        Padding="0,12.5"
-                        FontSize="16" Style="{StaticResource AddressBarr}"/>
+                        Padding="5,5"
+                        Margin="0,-15,0,0"
+                        FontSize="14" Style="{StaticResource AddressBarr}"/>
 
                     <AppBarSeparator
                         x:Name="AddressSeparator"
                         Grid.Column="4"
-                        Margin="-7.5,2.5" />
+                        Margin="-15,0" />
                 </Grid>
             </CommandBar.Content>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Share" IsEnabled="False"/>
-                <AppBarButton Icon="Setting" Label="Settings" IsEnabled="False"/>
+                <AppBarButton x:Name="SettingsBtn" Icon="Setting" Label="Settings" Click="SettingsBtn_OnClick" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
