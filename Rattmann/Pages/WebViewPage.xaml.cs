@@ -23,5 +23,25 @@ namespace Rattmann.Pages {
         public WebViewPage() {
             this.InitializeComponent();
         }
+
+        private void AddressBar_OnGotFocus(Object sender, RoutedEventArgs e) {
+            // Hide actions
+            this.AddressBar.BorderThickness = new Thickness(0, 2, 0, 0);
+            this.BottomBar.OverflowButtonVisibility = CommandBarOverflowButtonVisibility.Collapsed;
+            this.TabsSeparator.Visibility = Visibility.Collapsed;
+            this.AddressSeparator.Visibility = Visibility.Collapsed;
+            this.TabsBtn.Visibility = Visibility.Collapsed;
+            this.ReloadBtn.Visibility = Visibility.Collapsed;
+        }
+
+        private void AddressBar_OnLostFocus(Object sender, RoutedEventArgs e) {
+            // Show actions
+            this.AddressBar.BorderThickness = new Thickness(0);
+            this.BottomBar.OverflowButtonVisibility = CommandBarOverflowButtonVisibility.Auto;
+            this.TabsSeparator.Visibility = Visibility.Visible;
+            this.AddressSeparator.Visibility = Visibility.Visible;
+            this.TabsBtn.Visibility = Visibility.Visible;
+            this.ReloadBtn.Visibility = Visibility.Visible;
+        }
     }
 }
