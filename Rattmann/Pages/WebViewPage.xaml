@@ -199,7 +199,8 @@
                         Grid.Column="0"
                         Icon="ViewAll"
                         Height="50"
-                        Width="50"/>
+                        Width="50"
+                        Click="TabsBtn_OnClick"/>
                     <AppBarSeparator
                         x:Name="TabsSeparator"
                         Grid.Column="1"

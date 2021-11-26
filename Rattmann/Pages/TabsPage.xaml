@@ -8,7 +8,101 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Page.TopAppBar>
+        <CommandBar
+            HorizontalContentAlignment="Stretch"
+            IsDynamicOverflowEnabled="False"
+            OverflowButtonVisibility="Collapsed">
+            <CommandBar.Content>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <AppBarButton
+                        x:Name="BackBtn"
+                        Grid.Column="0"
+                        Icon="Back"
+                        Width="45"
+                        Click="BackBtn_OnClick"/>
+                    <ContentControl
+                        Grid.Column="1"
+                        Style="{ThemeResource PivotTitleContentControlStyle}"
+                        VerticalAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Margin="0,-15,0,0">
+                        <TextBlock>
+                            TABS
+                        </TextBlock>
+                    </ContentControl>
+                </Grid>
+            </CommandBar.Content>
+        </CommandBar>
+    </Page.TopAppBar>
 
-    </Grid>
+    <ScrollViewer Padding="12">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="5"
+                BorderThickness="5,0,5,5"
+                BorderBrush="{ThemeResource ButtonBorderThemeBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+
+                <Grid
+                    x:Name="TabItem"
+                    Grid.Row="0"
+                    Background="{ThemeResource ButtonBorderThemeBrush}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" />
+                    <TextBlock
+                        Grid.Column="1"
+                        FontSize="16"
+                        VerticalAlignment="Center"
+                        Padding="10,0">
+                        New tab
+                    </TextBlock>
+                    <AppBarButton
+                        Grid.Column="2"
+                        Icon="Cancel"
+                        Margin="0,-5,0,0"
+                        Width="35"
+                        Height="35"
+                        IsCompact="True"/>
+                </Grid>
+                <Grid Grid.Row="1"></Grid>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Add" Label="New tab" IsEnabled="False"/>
+                <AppBarButton Icon="ProtectedDocument" Label="InPrivate" IsEnabled="False" />
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="Close all tabs" IsEnabled="False"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>
