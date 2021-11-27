@@ -218,7 +218,16 @@
       <Version>6.2.8</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Rattmann.Controllers\Rattmann.Controllers.csproj">
+      <Project>{32f74cdf-6c5b-48a9-b2fc-0444933dd844}</Project>
+      <Name>Rattmann.Controllers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rattmann.Models\Rattmann.Models.csproj">
+      <Project>{b7978a09-06c2-4128-ac09-976bf5bf932c}</Project>
+      <Name>Rattmann.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
