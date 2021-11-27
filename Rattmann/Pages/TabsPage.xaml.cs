@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rattmann.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,11 +22,11 @@ namespace Rattmann.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class TabsPage : Page
-    {
-        public TabsPage()
-        {
+    public sealed partial class TabsPage : Page {
+        public TabsPage() {
             this.InitializeComponent();
+
+            this.TabsGrid.ItemsSource = App.Tabs.Tabs;
         }
 
         private void BackBtn_OnClick(Object sender, RoutedEventArgs e) {

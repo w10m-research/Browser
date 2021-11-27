@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Rattmann.Controllers {
     public class TabsController {
         public TabsController() {
-            this._tabs = new List<TabModel>();
+            
         }
 
         public void NavigateTo(LocationModel location) {
@@ -24,7 +24,7 @@ namespace Rattmann.Controllers {
             this._tabs[this.TabIndex].HistoryIndex -= steps;
         }
 
-        private List<TabModel> _tabs;
+        private List<TabModel> _tabs = new List<TabModel>();
         public List<TabModel> Tabs {
             get {
                 if (this._tabs.Count <= 0)
