@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rattmann.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,6 +19,14 @@ namespace Rattmann.Pages {
     public sealed partial class WebViewPage : Page {
         public WebViewPage() {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e) {
+            // TODO: use this
+            TabModel tab = App.Tabs.Tabs[App.Tabs.TabIndex];
+
+            if (tab.History[tab.HistoryIndex].URL != null)
+                this.AddressBar.Text = tab.History[tab.HistoryIndex].URL.AbsoluteUri;
         }
 
         private void AddressBar_OnGotFocus(Object sender, RoutedEventArgs e) {
@@ -46,6 +55,23 @@ namespace Rattmann.Pages {
 
         private void SettingsBtn_OnClick(Object sender, RoutedEventArgs e) {
             this.Frame.Navigate(typeof(Pages.SettingsPage), null, new DrillInNavigationTransitionInfo());
+        }
+
+        private void AddressBar_OnKeyDown(Object sender, KeyRoutedEventArgs e) {
+            if (e.Key != Windows.System.VirtualKey.Enter)
+                return;
+
+            String url = this.AddressBar.Text;
+
+            if (!url.Contains(".") && !url.Contains("://"))
+                return; // TODO: handle search
+
+            if (!url.StartsWith("http://") && !url.StartsWith("https://"))
+                url = "https://" + url;
+
+            App.Tabs.NavigateTo(new LocationModel() {
+                URL = new Uri(url)
+            });
         }
     }
 }

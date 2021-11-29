@@ -41,7 +41,7 @@
                         VerticalContentAlignment="Center"
                         Margin="0,-10,0,0">
                         <TextBlock>
-                            Tabs
+                            Tabs <Run x:Name="TabCountStr" />
                         </TextBlock>
                     </ContentControl>
                 </Grid>
@@ -54,7 +54,10 @@
             x:Name="TabsGrid"
             HorizontalAlignment="Stretch"
             HorizontalContentAlignment="Stretch"
-            ItemContainerStyle="{StaticResource ListViewItemStretchStyle}">
+            ItemContainerStyle="{StaticResource ListViewItemStretchStyle}"
+            ScrollViewer.VerticalScrollMode="Disabled"
+            ItemClick="TabsGrid_OnItemClick"
+            IsItemClickEnabled="True">
 
             <ListView.ItemTemplate>
                 <DataTemplate>

@@ -64,7 +64,8 @@
                         x:Name="DoNotTrackToggle"
                         Header="Send Do Not Track requests"
                         Margin="0,0,0,5"
-                        Toggled="DoNotTrackToggle_OnToggled"/>
+                        Toggled="DoNotTrackToggle_OnToggled"
+                        IsEnabled="False"/>
 
                     <ComboBox
                         x:Name="CookiesDrpDwn"

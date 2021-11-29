@@ -12,26 +12,26 @@ namespace Rattmann.Controllers {
         }
 
         public void NavigateTo(LocationModel location) {
-            this._tabs[this.TabIndex].History.Add(location);
-            this._tabs[this.TabIndex].HistoryIndex = this._tabs[this.TabIndex].History.Count;
+            this.Tabs[this.TabIndex].History.Add(location);
+            this.Tabs[this.TabIndex].HistoryIndex = this._tabs[this.TabIndex].History.Count - 1;
         }
 
         public void GoForward(Int32 steps = 1) {
-            this._tabs[this.TabIndex].HistoryIndex += steps;
+            this.Tabs[this.TabIndex].HistoryIndex += steps;
         }
 
         public void GoBackwards(Int32 steps = 1) {
-            this._tabs[this.TabIndex].HistoryIndex -= steps;
+            this.Tabs[this.TabIndex].HistoryIndex -= steps;
         }
 
         public void NewTab(TabModel tab) {
-            this._tabs.Add(tab);
-            this.TabIndex = this._tabs.Count;
+            this.Tabs.Add(tab);
+            this.TabIndex = this._tabs.Count - 1;
         }
 
         public void CloseTab(TabModel tab) {
-            this._tabs.Remove(tab);
-            this.TabIndex = this._tabs.Count;
+            this.Tabs.Remove(tab);
+            this.TabIndex = this._tabs.Count - 1;
         }
 
         private List<TabModel> _tabs = new List<TabModel>();
@@ -44,6 +44,6 @@ namespace Rattmann.Controllers {
             set => this._tabs = value;
         }
 
-        public Int32 TabIndex { get; set; }
+        public Int32 TabIndex { get; set; } = 0;
     }
 }

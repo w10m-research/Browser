@@ -8,6 +8,6 @@ namespace Rattmann.Models {
     public class LocationModel {
         public String Title { get; set; }
         public String Favicon { get; set; }
-        public Uri URL { get; }
+        public Uri URL { get; set; }
     }
 }

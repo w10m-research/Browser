@@ -6,8 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    NavigationCacheMode="Required">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <Style x:Key="AddressBarr" TargetType="TextBox">
             <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}"/>
@@ -219,8 +218,14 @@
                         VerticalAlignment="Center"
                         BorderThickness="0"
                         Padding="5,5"
-                        Margin="0,-15,0,0"
-                        FontSize="14" Style="{StaticResource AddressBarr}"/>
+                        Margin="0,-0,0,0"
+                        Height="45"
+                        InputScope="Url"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="True"
+                        FontSize="14"
+                        Style="{StaticResource AddressBarr}"
+                        KeyDown="AddressBar_OnKeyDown"/>
 
                     <AppBarSeparator
                         x:Name="AddressSeparator"

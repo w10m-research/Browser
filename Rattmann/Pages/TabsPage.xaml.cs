@@ -33,6 +33,7 @@ namespace Rattmann.Pages
         private void _refresh() {
             this.TabsGrid.ItemsSource = null;
             this.TabsGrid.ItemsSource = App.Tabs.Tabs;
+            this.TabCountStr.Text = $"({App.Tabs.Tabs.Count})";
         }
 
         private void BackBtn_OnClick(Object sender, RoutedEventArgs e) {
@@ -40,7 +41,14 @@ namespace Rattmann.Pages
         }
 
         private void NewTabBtn_OnClick(Object sender, RoutedEventArgs e) {
-            App.Tabs.NewTab(new TabModel());
+            App.Tabs.NewTab(new TabModel() {
+                HistoryIndex = 0,
+                History = new List<LocationModel>() {
+                    new LocationModel() {
+                        Title = $"New page {App.Tabs.Tabs.Count}"
+                    }
+                }
+            });
             this._refresh();
         }
 
@@ -49,6 +57,11 @@ namespace Rattmann.Pages
             var tab = (sender as AppBarButton)?.DataContext as TabModel;
             App.Tabs.CloseTab(tab);
             this._refresh();
+        }
+
+        private void TabsGrid_OnItemClick(Object sender, ItemClickEventArgs e) {
+            App.Tabs.TabIndex = App.Tabs.Tabs.FindIndex(x => x == (TabModel)e.ClickedItem);
+            this.Frame.GoBack(new DrillInNavigationTransitionInfo());
         }
     }
 }
