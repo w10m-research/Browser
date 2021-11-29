@@ -1,6 +1,7 @@
 ﻿using Rattmann.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -40,6 +41,13 @@ namespace Rattmann.Pages
 
         private void NewTabBtn_OnClick(Object sender, RoutedEventArgs e) {
             App.Tabs.NewTab(new TabModel());
+            this._refresh();
+        }
+
+        private void CloseBtn_OnClick(Object sender, RoutedEventArgs e) {
+            // App.Tabs.CloseTab();
+            var tab = (sender as AppBarButton)?.DataContext as TabModel;
+            App.Tabs.CloseTab(tab);
             this._refresh();
         }
     }
