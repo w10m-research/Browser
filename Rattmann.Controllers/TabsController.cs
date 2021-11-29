@@ -24,6 +24,11 @@ namespace Rattmann.Controllers {
             this._tabs[this.TabIndex].HistoryIndex -= steps;
         }
 
+        public void NewTab(TabModel tab) {
+            this._tabs.Add(tab);
+            this.TabIndex = this._tabs.Count;
+        }
+
         private List<TabModel> _tabs = new List<TabModel>();
         public List<TabModel> Tabs {
             get {

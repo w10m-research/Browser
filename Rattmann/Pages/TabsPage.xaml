@@ -87,7 +87,7 @@
                                 Margin="0,-5,0,0"
                                 Width="35"
                                 Height="35"
-                                IsCompact="True"
+                                IsEnabled="False"
                                 Foreground="{ThemeResource AppBarButtonForeground}"/>
                         </Grid>
                         <Grid Grid.Row="1"></Grid>
@@ -100,7 +100,7 @@
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
-                <AppBarButton Icon="Add" Label="New tab" IsEnabled="False"/>
+                <AppBarButton x:Name="NewTabBtn" Icon="Add" Label="New tab" Click="NewTabBtn_OnClick"/>
                 <AppBarButton Icon="ProtectedDocument" Label="InPrivate" IsEnabled="False" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>

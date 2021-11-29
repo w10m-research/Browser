@@ -26,11 +26,21 @@ namespace Rattmann.Pages
         public TabsPage() {
             this.InitializeComponent();
 
+            this._refresh();
+        }
+
+        private void _refresh() {
+            this.TabsGrid.ItemsSource = null;
             this.TabsGrid.ItemsSource = App.Tabs.Tabs;
         }
 
         private void BackBtn_OnClick(Object sender, RoutedEventArgs e) {
             this.Frame.GoBack(new DrillInNavigationTransitionInfo());
+        }
+
+        private void NewTabBtn_OnClick(Object sender, RoutedEventArgs e) {
+            App.Tabs.NewTab(new TabModel());
+            this._refresh();
         }
     }
 }

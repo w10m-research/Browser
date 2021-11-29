@@ -44,6 +44,38 @@
         <PivotItem Header="General">
             <ScrollViewer>
                 <StackPanel>
+                    <ComboBox
+                        x:Name="SearchEngineDrpDwn"
+                        Header="Search engine"
+                        Margin="0,0,0,5"
+                        HorizontalAlignment="Stretch"
+                        SelectionChanged="SearchEngineDrpDwn_OnSelectionChanged">
+                        <ComboBoxItem>Google</ComboBoxItem>
+                        <ComboBoxItem>Bing</ComboBoxItem>
+                        <ComboBoxItem>DuckDuckGo</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+            </ScrollViewer>
+        </PivotItem>
+        <PivotItem Header="Privacy">
+            <ScrollViewer>
+                <StackPanel>
+                    <ToggleSwitch
+                        x:Name="DoNotTrackToggle"
+                        Header="Send Do Not Track requests"
+                        Margin="0,0,0,5"
+                        Toggled="DoNotTrackToggle_OnToggled"/>
+
+                    <ComboBox
+                        x:Name="CookiesDrpDwn"
+                        Header="Cookies"
+                        Margin="0,0,0,5"
+                        HorizontalAlignment="Stretch"
+                        SelectionChanged="CookiesDrpDwn_OnSelectionChanged">
+                        <ComboBoxItem>Don't block cookies</ComboBoxItem>
+                        <ComboBoxItem>Block only third party cookies</ComboBoxItem>
+                        <ComboBoxItem>Block all cookies</ComboBoxItem>
+                    </ComboBox>
                 </StackPanel>
             </ScrollViewer>
         </PivotItem>
@@ -64,7 +96,7 @@
 
                 <TextBlock
                     Style="{ThemeResource SubtitleTextBlockStyle}"
-                    Margin="0,25,0,0">
+                    Margin="0,5,0,0">
                     Credits
                 </TextBlock>
                 <TextBlock
