@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using muxc = Microsoft.UI.Xaml.Controls;
@@ -81,7 +82,16 @@ namespace Rattmann.Pages {
                 this.TabRoot.SelectedIndex = this.TabRoot.TabItems.Count - 1;
         }
 
-        private void ButtonBase_OnClick(Object sender, RoutedEventArgs e) {
+
+        private void SettingsBtn_PointerEntered(Object sender, PointerRoutedEventArgs e) {
+            muxc.AnimatedIcon.SetState(this.SettingAnimatedIcon, "PointerOver");
+        }
+
+        private void SettingsBtn_PointerExited(Object sender, PointerRoutedEventArgs e) {
+            muxc.AnimatedIcon.SetState(this.SettingAnimatedIcon, "Normal");
+        }
+
+        private void SettingsBtn_OnClick(Object sender, RoutedEventArgs e) {
             this.Frame.Navigate(typeof(Pages.SettingsPage), null, new DrillInNavigationTransitionInfo());
         }
     }

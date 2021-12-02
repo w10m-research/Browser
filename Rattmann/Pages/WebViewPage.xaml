@@ -45,7 +45,8 @@
                 x:Name="AddressBar"
                 PlaceholderText="Search or browse"
                 Padding="15,10"
-                BorderThickness="0"/>
+                BorderThickness="0,2"
+                CornerRadius="0"/>
         </Grid>
         <WebView
             x:Name="WebRoot"

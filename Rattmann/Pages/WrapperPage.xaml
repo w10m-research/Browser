@@ -6,8 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:animatedVisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    NavigationCacheMode="Required">
     <Page.Resources>
         <Style x:Key="AddressBarr" TargetType="TextBox">
             <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}"/>
@@ -181,13 +183,34 @@
         TabCloseRequested="TabRoot_OnTabCloseRequested">
 
         <muxc:TabView.TabStripHeader>
-            <Grid x:Name="ShellTitlebarInset" Background="Transparent">
-                <AppBarButton Icon="Home" Width="35" Height="35" />
+            <Grid
+                x:Name="ShellTitlebarInset"
+                Background="Transparent"
+                VerticalAlignment="Bottom">
+                <Button
+                    x:Name="SettingsBtn"
+                    PointerEntered="SettingsBtn_PointerEntered"
+                    PointerExited="SettingsBtn_PointerExited"
+                    Click="SettingsBtn_OnClick"
+                    Width="35"
+                    Height="35"
+                    Margin="0"
+                    Padding="7.5"
+                    BorderThickness="0"
+                    Background="Transparent">
+                    <muxc:AnimatedIcon x:Name="SettingAnimatedIcon">
+                        <muxc:AnimatedIcon.Source>
+                            <animatedVisuals:AnimatedSettingsVisualSource />
+                        </muxc:AnimatedIcon.Source>
+                        <muxc:AnimatedIcon.FallbackIconSource>
+                            <muxc:SymbolIconSource Symbol="Setting"/>
+                        </muxc:AnimatedIcon.FallbackIconSource>
+                    </muxc:AnimatedIcon>
+                </Button>
             </Grid>
         </muxc:TabView.TabStripHeader>
         <muxc:TabView.TabStripFooter>
             <Grid x:Name="CustomDragRegion" Background="Transparent">
-                <AppBarButton Icon="Setting" Width="35" Height="35" Click="ButtonBase_OnClick" />
             </Grid>
         </muxc:TabView.TabStripFooter>
     </muxc:TabView>
