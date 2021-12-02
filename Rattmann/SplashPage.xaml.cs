@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -24,9 +27,14 @@ namespace Rattmann {
             this.InitializeComponent();
         }
 
-        private void SplashPage_OnLoaded(Object sender, RoutedEventArgs e) {
+        private async void SplashPage_OnLoaded(Object sender, RoutedEventArgs e) {
+            if (ApiInformation.IsApiContractPresent("Windows.Phone.PhoneContract", 1, 0)) {
+                var statusBar = StatusBar.GetForCurrentView();
+                await statusBar.HideAsync();
+            }
+
             // TODO
-            this.Frame.Navigate(typeof(Pages.WebViewPage));
+            this.Frame.Navigate(typeof(Pages.WrapperPage));
             this.Frame.BackStack.Remove(this.Frame.BackStack.Last());
         }
     }

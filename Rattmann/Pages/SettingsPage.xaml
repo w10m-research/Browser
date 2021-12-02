@@ -47,7 +47,7 @@
                     <ComboBox
                         x:Name="SearchEngineDrpDwn"
                         Header="Search engine"
-                        Margin="0,0,0,5"
+                        Margin="0,15,0,5"
                         HorizontalAlignment="Stretch"
                         SelectionChanged="SearchEngineDrpDwn_OnSelectionChanged">
                         <ComboBoxItem>Google</ComboBoxItem>
@@ -63,7 +63,7 @@
                     <ToggleSwitch
                         x:Name="DoNotTrackToggle"
                         Header="Send Do Not Track requests"
-                        Margin="0,0,0,5"
+                        Margin="0,15,0,5"
                         Toggled="DoNotTrackToggle_OnToggled"
                         IsEnabled="False"/>
 
@@ -83,6 +83,7 @@
         <PivotItem Header="About">
             <StackPanel>
                 <TextBlock
+                    Margin="0,15,0,5"
                     Style="{ThemeResource SubtitleTextBlockStyle}">
                     About this app
                 </TextBlock>
@@ -97,7 +98,7 @@
 
                 <TextBlock
                     Style="{ThemeResource SubtitleTextBlockStyle}"
-                    Margin="0,5,0,0">
+                    Margin="0,15,0,5">
                     Credits
                 </TextBlock>
                 <TextBlock
