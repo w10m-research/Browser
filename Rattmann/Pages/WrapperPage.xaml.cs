@@ -1,6 +1,7 @@
 ﻿using Rattmann.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -11,29 +12,25 @@ using muxc = Microsoft.UI.Xaml.Controls;
 
 namespace Rattmann.Pages {
     public sealed partial class WrapperPage : Page {
+        public ObservableCollection<muxc.TabViewItem> TabViewItemCollection = new ObservableCollection<muxc.TabViewItem>();
+
         public WrapperPage() {
             this.InitializeComponent();
+
+            this.CreateNewTab();
         }
 
-        public List<muxc.TabViewItem> TabViewItemCollection {
-            get {
-                var tabs = new List<muxc.TabViewItem>();
-                foreach (TabModel item in App.Tabs.Tabs) {
+        private void CreateNewTab() {
+            var tab = new muxc.TabViewItem {
+                IconSource = new muxc.SymbolIconSource() { Symbol = Symbol.NewWindow },
+                Header = "New tab"
+            };
 
-                    var tab = new muxc.TabViewItem {
-                        IconSource = new muxc.SymbolIconSource() { Symbol = Symbol.Document },
-                        Header = item.History[item.HistoryIndex].Title
-                    };
-                    
-                    var frame = new Frame();
-                    tab.Content = frame;
-                    frame.Navigate(typeof(Pages.WebViewPage));
+            var frame = new Frame();
+            tab.Content = frame;
+            frame.Navigate(typeof(Pages.WebViewPage), tab, new DrillInNavigationTransitionInfo());
 
-                    tabs.Add(tab);
-                }
-
-                return tabs;
-            }
+            this.TabViewItemCollection.Add(tab);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {
@@ -60,39 +57,11 @@ namespace Rattmann.Pages {
         }
 
         private void TabRoot_OnAddTabButtonClick(muxc.TabView sender, Object args) {
-            App.Tabs.NewTab(new TabModel());
-
-            // Refresh tabs
-            this.TabRoot.TabItemsSource = this.TabViewItemCollection;
-
-            // Set the new tab as active
-            this.TabRoot.SelectedIndex = this.TabRoot.TabItems.Count - 1;
+            this.CreateNewTab();
         }
 
         private void TabRoot_OnTabCloseRequested(muxc.TabView sender, muxc.TabViewTabCloseRequestedEventArgs args) {
-            Int32 pos = this.TabRoot.TabItems.IndexOf(args.Tab);
-
-            App.Tabs.CloseTab(App.Tabs.Tabs[pos]);
-
-            // Refresh tabs
-            this.TabRoot.TabItemsSource = this.TabViewItemCollection;
-
-            // If we're closing the current tab; set the next one as active
-            if (pos >= (this.TabRoot.TabItems.Count - 1))
-                this.TabRoot.SelectedIndex = this.TabRoot.TabItems.Count - 1;
-        }
-
-
-        private void SettingsBtn_PointerEntered(Object sender, PointerRoutedEventArgs e) {
-            muxc.AnimatedIcon.SetState(this.SettingAnimatedIcon, "PointerOver");
-        }
-
-        private void SettingsBtn_PointerExited(Object sender, PointerRoutedEventArgs e) {
-            muxc.AnimatedIcon.SetState(this.SettingAnimatedIcon, "Normal");
-        }
-
-        private void SettingsBtn_OnClick(Object sender, RoutedEventArgs e) {
-            this.Frame.Navigate(typeof(Pages.SettingsPage), null, new DrillInNavigationTransitionInfo());
+            this.TabViewItemCollection.Remove(args.Tab);
         }
     }
 }

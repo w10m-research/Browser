@@ -5,8 +5,12 @@
     xmlns:local="using:Rattmann.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:windows10Version1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
+    xmlns:windows10FallCreatorsUpdate="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    NavigationCacheMode="Required">
     
     <Grid x:Name="RootGrid">
         <VisualStateManager.VisualStateGroups>
@@ -41,18 +45,55 @@
         <Grid
             x:Name="AddressRoot"
             Grid.Row="0">
-            <TextBox
-                x:Name="AddressBar"
-                PlaceholderText="Search or browse"
-                Padding="15,10"
-                BorderThickness="0,2"
-                CornerRadius="0"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <CommandBar 
+                IsDynamicOverflowEnabled="False"
+                HorizontalContentAlignment="Stretch"
+                VerticalContentAlignment="Stretch"
+                IsOpen="False" 
+                DefaultLabelPosition="Right"
+                Background="{ThemeResource TabViewItemHeaderBackgroundSelected}">
+                <AppBarButton Icon="Home" Label="Bookmarks" IsEnabled="False" />
+                <AppBarButton Grid.Column="0" Icon="Back" Label="Back" IsEnabled="False" />
+                <AppBarButton Grid.Column="1" Icon="Forward" Label="Forward" IsEnabled="False" />
+
+                <CommandBar.Content>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBox
+                            x:Name="AddressBar"
+                            PlaceholderText="Search or browse"
+                            InputScope="Url"
+                            IsSpellCheckEnabled="False"
+                            IsTextPredictionEnabled="True"
+                            Margin="0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            windows10Version1809:CornerRadius="0"/>
+                    </StackPanel>
+                </CommandBar.Content>
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton
+                        x:Name="SettingsButton"
+                        Icon="Setting"
+                        Label="Settings"
+                        Click="SettingsButton_OnClick">
+                        <windows10FallCreatorsUpdate:AppBarButton.KeyboardAccelerators>
+                            <windows10FallCreatorsUpdate:KeyboardAccelerator Modifiers="Control" Key="I" />
+                        </windows10FallCreatorsUpdate:AppBarButton.KeyboardAccelerators>
+                    </AppBarButton>
+                </CommandBar.SecondaryCommands>
+            </CommandBar>
         </Grid>
         <WebView
             x:Name="WebRoot"
             Grid.Row="1"
-            Source="https://google.com"
+            Source="https://example.com"
             VerticalAlignment="Stretch"
-            HorizontalAlignment="Stretch" />
+            HorizontalAlignment="Stretch"
+            NavigationCompleted="WebRoot_OnNavigationCompleted"/>
     </Grid>
 </Page>

@@ -11,6 +11,6 @@
 
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
         <Image Source="Assets/SplashScreen.png" Height="250"/>
-        <ProgressRing IsActive="True" Width="50" Height="50" Foreground="White"/>
+        <ProgressRing IsActive="True" Width="50" Height="50" Foreground="{ThemeResource SystemControlForegroundAltHighBrush}"/>
     </StackPanel>
 </Page>
